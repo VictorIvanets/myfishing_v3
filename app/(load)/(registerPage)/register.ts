@@ -12,7 +12,7 @@ export interface RegisterResponse {
   city: string
 }
 
-export const setUser = async (
+const setUser = async (
   login: string,
   password: string,
   name: string,
@@ -37,3 +37,5 @@ export const setUser = async (
     return e
   }
 }
+
+export default setUser

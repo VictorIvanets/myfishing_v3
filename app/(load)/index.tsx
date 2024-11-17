@@ -11,7 +11,7 @@ import {
   LOCAL_LOGIN,
   LOCAL_USERID,
 } from "@/constants/constants"
-import { styles } from "./styles.loadpage"
+import styles from "./styles.loadpage"
 import { Link } from "expo-router"
 
 export default function LoadPage() {

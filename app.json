@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MYF",
-    "slug": "MYF",
+    "slug": "myf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "myf.v3"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +37,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0c895089-1f37-4760-ab5c-3de1ae8c1fc5"
+      }
+    },
+    "owner": "victorivanets"
   }
 }

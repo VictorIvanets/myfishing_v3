@@ -1,3 +1,4 @@
+import { colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 export const stylesMapPage = StyleSheet.create({
@@ -6,6 +7,7 @@ export const stylesMapPage = StyleSheet.create({
     padding: 0,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.deepdark,
   },
   contentbox: {
     width: "100%",

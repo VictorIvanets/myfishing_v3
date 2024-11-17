@@ -8,10 +8,6 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={"light-content"} />
-      <Image
-        source={require("@/assets/images/fonfish.jpg")}
-        style={styles.maifon}
-      />
       <ThemedText style={styles.colorWhite}>StartPage</ThemedText>
       <Pressable onPress={() => exitLogin()}>
         <ThemedText type="subtitle">EXIT</ThemedText>

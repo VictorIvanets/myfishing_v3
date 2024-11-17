@@ -33,10 +33,6 @@ export default function AllSetPage() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={"light-content"} />
-      <Image
-        source={require("@/assets/images/fonfish.jpg")}
-        style={styles.maifon}
-      />
       <ThemedText style={styles.colorWhite}>AllSetPage {userId} </ThemedText>
     </View>
   )

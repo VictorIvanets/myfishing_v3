@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/ThemedText"
 import React, { useEffect, useState } from "react"
 import { TextInput, View, Image, Pressable, StatusBar } from "react-native"
-import { getlogin } from "./authGet"
-import { styles } from "./styles.loginpage"
+import getlogin from "./authGet"
+import styles from "./styles.loginpage"
 import Preloader from "@/components/preloader/preloader"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
@@ -71,7 +71,6 @@ export default function LoginPage() {
         source={require("@/assets/images/fonfish.jpg")}
         style={styles.maifon}
       />
-
       <View style={styles.appLogoBox}>
         <Image
           source={require("@/assets/images/logoMf-01.png")}

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
@@ -46,3 +46,5 @@ export const styles = StyleSheet.create({
     zIndex: -1,
   },
 })
+
+export default styles

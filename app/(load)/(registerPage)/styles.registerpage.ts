@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native"
 
-export const stylesregister = StyleSheet.create({
+const stylesregister = StyleSheet.create({
   container: {
     // width: "100%",
     // height: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 30,
   },
   linkFoLoginText: {
     textAlign: "center",
@@ -116,10 +117,11 @@ export const stylesregister = StyleSheet.create({
     width: 200,
   },
   mainscroll: {
-    // flex: 1,
     width: "100%",
     height: "100%",
     paddingTop: 30,
     paddingBottom: 30,
   },
 })
+
+export default stylesregister

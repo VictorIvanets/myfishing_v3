@@ -10,21 +10,20 @@ import { useColorScheme } from "@/hooks/useColorScheme"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme()
-
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: true,
+
         tabBarActiveTintColor: "#00acac",
-        tabBarInactiveTintColor: "#014c55",
+        tabBarInactiveTintColor: "#00474f",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: {
           backgroundColor: "#010808",
           borderColor: "#010808",
-          height: 66,
+          height: 0,
         },
       }}
     >
@@ -40,33 +39,6 @@ export default function TabLayout() {
           },
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="announcement" size={42} color={color} />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="allsets"
-        options={{
-          title: "РИБАЛКИ",
-          tabBarIconStyle: {
-            width: 45,
-            height: 45,
-          },
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="view-list" size={42} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="mappage"
-        options={{
-          title: "КАРТА",
-          tabBarIconStyle: {
-            width: 45,
-            height: 45,
-          },
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="map" size={42} color={color} />
           ),
         }}
       />

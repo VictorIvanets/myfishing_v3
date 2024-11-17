@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native"
 
+import { colors } from "@/constants/Colors"
+
 export const stylesStartPage = StyleSheet.create({
   container: {
     flex: 1,
@@ -8,6 +10,7 @@ export const stylesStartPage = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.deepdark,
   },
   maifon: {
     width: "100%",

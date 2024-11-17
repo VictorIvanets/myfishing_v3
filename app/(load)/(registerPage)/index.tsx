@@ -8,9 +8,9 @@ import {
   StatusBar,
 } from "react-native"
 import { LinearGradient } from "expo-linear-gradient"
-import { stylesregister as styles } from "./styles.registerpage"
+import { default as styles } from "./styles.registerpage"
 import { useEffect, useState } from "react"
-import { setUser } from "./register"
+import setUser from "./register"
 import Preloader from "@/components/preloader/preloader"
 import { Link } from "expo-router"
 

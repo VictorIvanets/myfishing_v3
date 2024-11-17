@@ -9,7 +9,7 @@ export interface LoginResponse {
   userId: string
 }
 
-export const getlogin = async (login: string, password: string) => {
+const getlogin = async (login: string, password: string) => {
   try {
     const data = await axios.post<LoginResponse>(`${PREFIX}auth/login`, {
       login: login,
@@ -25,3 +25,5 @@ export const getlogin = async (login: string, password: string) => {
     return e
   }
 }
+
+export default getlogin

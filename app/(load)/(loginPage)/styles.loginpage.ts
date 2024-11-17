@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
@@ -123,7 +123,9 @@ export const styles = StyleSheet.create({
   appLogo: {
     height: 108,
     width: 200,
-    bottom: 0,
-    position: "absolute",
+    // bottom: 0,
+    // position: "absolute",
   },
 })
+
+export default styles
