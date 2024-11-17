@@ -4,6 +4,9 @@ import { TextInput, View, Image, Pressable, StatusBar } from "react-native"
 import { getlogin } from "./authGet"
 import { styles } from "./styles.loginpage"
 import Preloader from "@/components/preloader/preloader"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
+import { Link, useNavigation } from "expo-router"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -13,6 +16,7 @@ export default function LoginPage() {
   const [viewLabelPass, setViewLabelPass] = useState(true)
   const [errorAuth, setErrorAuth] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [loginOk, setloginOk] = useState(false)
 
   useEffect(() => {
     if (errorAuth) setErrorAuth("")
@@ -39,22 +43,23 @@ export default function LoginPage() {
     } else {
       setIsLoading(true)
       const data = await getlogin(loginInput, passwordInput)
-
-      if (data.message) {
-        setErrorAuth(data.message)
+      if (!data.login) {
+        setErrorAuth(`Щось не так. Спробуйте ще раз`)
         setIsLoading(false)
+        setloginOk(false)
       } else {
-        // dispatch(
-        //   userActions.login({
-        //     login: data.login,
-        //     userId: data.userId,
-        //     jwt: data.access_token,
-        //   })
-        // )
+        await AsyncStorage.removeItem(LOCAL_LOGIN)
+        await AsyncStorage.removeItem(LOCAL_JWT)
+        await AsyncStorage.removeItem(LOCAL_USERID)
+
+        await AsyncStorage.setItem(LOCAL_LOGIN, data.login)
+        await AsyncStorage.setItem(LOCAL_JWT, data.access_token)
+        await AsyncStorage.setItem(LOCAL_USERID, data.userId)
         setIsLoading(false)
         setLoginInput("")
         setPasswordInput("")
-        // navigate("/startpage")
+        setErrorAuth("")
+        setloginOk(true)
       }
     }
   }
@@ -75,11 +80,7 @@ export default function LoginPage() {
       </View>
       {!isLoading ? (
         <View style={styles.submitbox}>
-          <View style={styles.buttonboxback}>
-            {/* <Pressable onPress={() => navigate("/")}>
-              <ThemedText style={styles.colorWhite}>BACK</ThemedText>
-            </Pressable> */}
-          </View>
+          <View style={styles.buttonboxback}></View>
           {validInput ? (
             <ThemedText style={styles.colorWhite} type="default">
               {validInput}
@@ -91,44 +92,62 @@ export default function LoginPage() {
           ) : (
             <ThemedText style={styles.colorWhite} type="default"></ThemedText>
           )}
+          {!loginOk ? (
+            <>
+              <View style={styles.inputpass}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(t) => {
+                    setLoginInput(t)
+                  }}
+                  value={loginInput}
+                />
+                <View style={styles.inputBottoLine}></View>
+                <ThemedText
+                  style={
+                    viewLabelLogin ? styles.inputLabel : styles.inputLabelActiv
+                  }
+                  type="subtitlelite"
+                >
+                  login
+                </ThemedText>
+              </View>
 
-          <View style={styles.inputpass}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(t) => {
-                setLoginInput(t)
-              }}
-              value={loginInput}
-            />
-            <View style={styles.inputBottoLine}></View>
-            <ThemedText
-              style={
-                viewLabelLogin ? styles.inputLabel : styles.inputLabelActiv
-              }
-              type="subtitlelite"
-            >
-              login
-            </ThemedText>
-          </View>
+              <View style={styles.inputpass}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(t) => setPasswordInput(t)}
+                  value={passwordInput}
+                />
+                <View style={styles.inputBottoLine}></View>
 
-          <View style={styles.inputpass}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(t) => setPasswordInput(t)}
-              value={passwordInput}
-            />
-            <View style={styles.inputBottoLine}></View>
-
-            <ThemedText
-              style={viewLabelPass ? styles.inputLabel : styles.inputLabelActiv}
-              type="subtitlelite"
-            >
-              password
-            </ThemedText>
-          </View>
-          <Pressable style={styles.buttonbox} onPress={onSubmit}>
-            <ThemedText style={styles.colorWhite}>ВХІД</ThemedText>
-          </Pressable>
+                <ThemedText
+                  style={
+                    viewLabelPass ? styles.inputLabel : styles.inputLabelActiv
+                  }
+                  type="subtitlelite"
+                >
+                  password
+                </ThemedText>
+              </View>
+              <Pressable style={styles.buttonbox} onPress={onSubmit}>
+                <ThemedText style={styles.colorWhite}>ВХІД</ThemedText>
+              </Pressable>
+            </>
+          ) : (
+            <>
+              <Link href="/(tabs)">
+                <ThemedText type="subtitle" style={styles.linkFoLoginText}>
+                  ВІТАЮ
+                </ThemedText>
+              </Link>
+              <Link href="/(tabs)">
+                <ThemedText type="default" style={styles.linkFoLoginText}>
+                  ТИСНИ ЩОБ ПРОДОВЖИТИ
+                </ThemedText>
+              </Link>
+            </>
+          )}
         </View>
       ) : (
         <View style={styles.loading}>

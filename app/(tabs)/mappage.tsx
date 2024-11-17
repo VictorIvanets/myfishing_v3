@@ -5,6 +5,7 @@ import MapView, {
   Callout,
   CalloutPressEvent,
   Marker,
+  MarkerPressEvent,
   PROVIDER_GOOGLE,
   Region,
 } from "react-native-maps"
@@ -22,6 +23,8 @@ import { ThemedText } from "@/components/ThemedText"
 import { getAllSets, MapResponse } from "../../components/mapPage/getAllsets"
 import MapMarker from "../../components/mapPage/setMarker"
 import NewSetMapMarker from "../../components/mapPage/newSetMarker"
+import { LOCAL_INIT_LAT, LOCAL_INIT_LON } from "@/constants/constants"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface MarkerProps {
   latitude: number
@@ -30,19 +33,40 @@ interface MarkerProps {
   longitudeDelta: number
 }
 
+export interface SetCoordsProps {
+  latitude: number
+  longitude: number
+}
+
 export default function MapPage() {
-  // const { latitude, longitude } = useSelector((s: RootState) => s.location)
   const [customMarker, setCustomeMarker] = useState<MarkerProps | null>()
   const [allSetsMarkers, setAllSetsMarkers] = useState<MapResponse[] | null>()
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch<AppDispath>()
 
-  const latitude = 51.0
-  const longitude = 28.0
+  const [latitude, setLatitude] = useState<number>()
+  const [longitude, setLongitude] = useState<number>()
 
-  const calloutPressed = (e: CalloutPressEvent) => {
-    console.log(e)
+  const [viewSetMarker, setViewSetMarker] = useState<SetCoordsProps | null>(
+    null
+  )
+  const [viewOneSetById, setViewOneSetById] = useState<number | null>(null)
+
+  const [btnViewAll, setBtnViewAll] = useState<boolean>(true)
+  const [btnViewOne, setBtnViewOne] = useState<boolean>(false)
+
+  async function localGetUserId() {
+    const lat = await AsyncStorage.getItem(LOCAL_INIT_LAT)
+    const lon = await AsyncStorage.getItem(LOCAL_INIT_LON)
+    lat && setLatitude(+JSON.parse(lat))
+    lon && setLongitude(+JSON.parse(lon))
   }
+
+  useEffect(() => {
+    localGetUserId()
+  }, [])
+
+  // const calloutPressed = (e: CalloutPressEvent) => {
+  //   console.log(e)
+  // }
 
   const onRegionChange = (region: Region) => {
     setCustomeMarker(region)
@@ -52,10 +76,14 @@ export default function MapPage() {
     const allset = await getAllSets()
     setAllSetsMarkers(allset)
     setCustomeMarker(null)
+    setBtnViewAll(false)
+    setBtnViewOne(true)
   }
 
   const returtToMap = async () => {
     setAllSetsMarkers(null)
+    setBtnViewAll(true)
+    setBtnViewOne(false)
   }
 
   return (
@@ -63,81 +91,100 @@ export default function MapPage() {
       colors={["rgba(0, 98, 128, 0.719)", "transparent", "rgba(0,0,0,0.8)"]}
       style={styles.container}
     >
-      <StatusBar barStyle={"dark-content"} />
-
-      <View style={styles.contentbox}>
-        {latitude && longitude ? (
-          <MapView
-            style={StyleSheet.absoluteFillObject}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.1,
-              longitudeDelta: 0.1,
-            }}
-            showsUserLocation
-            showsMyLocationButton
-            provider={PROVIDER_GOOGLE}
-            onRegionChangeComplete={onRegionChange}
-          >
-            {allSetsMarkers &&
-              allSetsMarkers.map((marker, index) => (
-                <Marker
-                  key={marker.setID}
-                  title={marker.title}
-                  coordinate={{
-                    latitude: marker.coords[0],
-                    longitude: marker.coords[1],
-                  }}
-                  // onPress={() => onMarkerSelected(marker)}
-                >
-                  <Callout
+      <StatusBar barStyle={"light-content"} />
+      {viewOneSetById ? (
+        <MapMarker
+          setViewOneSetById={setViewOneSetById}
+          marker={viewOneSetById}
+        />
+      ) : viewSetMarker ? (
+        <NewSetMapMarker
+          coords={viewSetMarker}
+          setViewSetMarker={setViewSetMarker}
+        />
+      ) : (
+        <>
+          <View style={styles.contentbox}>
+            {latitude && longitude ? (
+              <MapView
+                style={StyleSheet.absoluteFillObject}
+                initialRegion={{
+                  latitude: latitude,
+                  longitude: longitude,
+                  latitudeDelta: 0.1,
+                  longitudeDelta: 0.1,
+                }}
+                showsUserLocation
+                showsMyLocationButton
+                provider={PROVIDER_GOOGLE}
+                onRegionChangeComplete={onRegionChange}
+              >
+                {allSetsMarkers &&
+                  allSetsMarkers.map((marker, index) => (
+                    <Marker
+                      key={marker.setID}
+                      title={marker.title}
+                      onPress={() => {
+                        setViewOneSetById(marker.setID)
+                      }}
+                      coordinate={{
+                        latitude: marker.coords[0],
+                        longitude: marker.coords[1],
+                      }}
+                    >
+                      {/* <Callout
                   // onPress={() => navigate(`/startpage/set/${marker.setID}`)}
                   >
                     <MapMarker marker={marker} />
-                  </Callout>
-                </Marker>
-              ))}
-            {customMarker && (
-              <Marker
-                title={"MY LOCATION"}
-                coordinate={customMarker}
-                // onPress={() => myMarkerSelected(customMarker)}
-              >
-                <Callout
+                  </Callout> */}
+                    </Marker>
+                  ))}
+                {customMarker && (
+                  <Marker
+                    title={"ДОДАТИ МІСЦЕ"}
+                    coordinate={customMarker}
+                    onPress={(e: MarkerPressEvent) => {
+                      setViewSetMarker(e.nativeEvent.coordinate)
+                    }}
+                  >
+                    {/* <Callout
                   onPress={(e: CalloutPressEvent) => {
-                    // dispatch(
-                    //   locNewSetActions.setCoordsNewSet(e.nativeEvent.coordinate)
-                    // )
-                    console.log(e.nativeEvent.coordinate)
-                    // navigate(`/startpage/newset`)
+                    // console.log(e.nativeEvent.coordinate)
                   }}
                 >
-                  <NewSetMapMarker />
-                </Callout>
-              </Marker>
+                  <NewSetMapMarker /> 
+                </Callout> */}
+                  </Marker>
+                )}
+              </MapView>
+            ) : (
+              <View style={styles.contentbox}>
+                <ThemedText type="subtitle" style={{ color: "white" }}>
+                  НЕ ВСТАНОВЛЕННО КООРДИНАТИ
+                </ThemedText>
+              </View>
             )}
-          </MapView>
-        ) : (
-          <View style={styles.contentbox}>
-            <ThemedText type="subtitle" style={{ color: "white" }}>
-              НЕ ВСТАНОВЛЕННО КООРДИНАТИ
-            </ThemedText>
           </View>
-        )}
-      </View>
-      <View style={styles.buttonbox}>
-        <Pressable onPress={() => loadAllSets()} style={styles.button}>
-          <ThemedText type={"mintext"} style={styles.colorWhite}>
-            ВСІ МІСЦЯ
-          </ThemedText>
-        </Pressable>
-        <Pressable onPress={() => returtToMap()} style={styles.button}>
-          <ThemedText type={"mintext"} style={styles.colorWhite}>
-            ВИБІР
-          </ThemedText>
-        </Pressable>
-      </View>
+          <View style={styles.buttonbox}>
+            <Pressable
+              onPress={() => loadAllSets()}
+              style={btnViewAll ? styles.button : styles.buttonactyve}
+            >
+              <ThemedText type={"mintext"} style={styles.colorWhite}>
+                ВСІ МІСЦЯ
+              </ThemedText>
+            </Pressable>
+            <Pressable
+              onPress={() => returtToMap()}
+              style={btnViewOne ? styles.button : styles.buttonactyve}
+            >
+              <ThemedText type={"mintext"} style={styles.colorWhite}>
+                ВИБІР
+              </ThemedText>
+            </Pressable>
+          </View>
+        </>
+      )}
     </LinearGradient>
   )
 }

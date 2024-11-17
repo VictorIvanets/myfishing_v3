@@ -1,12 +1,13 @@
 import { Tabs } from "expo-router"
 import React from "react"
-import { Platform } from "react-native"
+import { Platform, StatusBar, View } from "react-native"
 
 import { HapticTab } from "@/components/HapticTab"
 import { IconSymbol } from "@/components/ui/IconSymbol"
 import TabBarBackground from "@/components/ui/TabBarBackground"
 import { Colors } from "@/constants/Colors"
 import { useColorScheme } from "@/hooks/useColorScheme"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 export default function TabLayout() {
   const colorScheme = useColorScheme()
@@ -14,25 +15,32 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarShowLabel: true,
+
+        tabBarActiveTintColor: "#00acac",
+        tabBarInactiveTintColor: "#00474f",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: "absolute",
-          },
-          default: {},
-        }),
+        tabBarStyle: {
+          backgroundColor: "#010808",
+          borderColor: "#010808",
+          height: 66,
+        },
       }}
     >
+      <StatusBar barStyle={"light-content"} />
+
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "ІНФОРМАЦІЯ",
+          tabBarIconStyle: {
+            width: 45,
+            height: 45,
+          },
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={20} name="house.fill" color={color} />
+            <MaterialIcons name="announcement" size={42} color={color} />
           ),
         }}
       />
@@ -40,18 +48,26 @@ export default function TabLayout() {
       <Tabs.Screen
         name="allsets"
         options={{
-          title: "allsets",
+          title: "РИБАЛКИ",
+          tabBarIconStyle: {
+            width: 45,
+            height: 45,
+          },
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={20} name="paperplane.fill" color={color} />
+            <MaterialIcons name="view-list" size={42} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="mappage"
         options={{
-          title: "mappage",
+          title: "КАРТА",
+          tabBarIconStyle: {
+            width: 45,
+            height: 45,
+          },
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={20} name="paperplane.fill" color={color} />
+            <MaterialIcons name="map" size={42} color={color} />
           ),
         }}
       />

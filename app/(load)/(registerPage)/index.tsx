@@ -12,6 +12,7 @@ import { stylesregister as styles } from "./styles.registerpage"
 import { useEffect, useState } from "react"
 import { setUser } from "./register"
 import Preloader from "@/components/preloader/preloader"
+import { Link } from "expo-router"
 
 export default function RegisterPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -82,8 +83,8 @@ export default function RegisterPage() {
         userCityInput
       )
 
-      if (data.message) {
-        setErrorAuth(data.message)
+      if (!data.login) {
+        setErrorAuth("ПОМИЛКА!")
         setIsLoading(false)
       } else {
         setLogin(data.login)
@@ -97,9 +98,6 @@ export default function RegisterPage() {
         setUserSubnameInput("")
         setUserCountryInput("")
         setUserCityInput("")
-        // setTimeout(() => {
-        //   navigate("/login")
-        // }, 3000)
       }
     }
   }
@@ -280,6 +278,11 @@ export default function RegisterPage() {
                 <ThemedText type="subtitle" style={styles.linkFoLoginText}>
                   login: {login}
                 </ThemedText>
+                <View style={styles.buttonboxLogIn}>
+                  <Link href="/(load)/(loginPage)">
+                    <ThemedText style={styles.colorWhite}>ВХІД</ThemedText>
+                  </Link>
+                </View>
               </View>
             )}
           </>
@@ -288,16 +291,6 @@ export default function RegisterPage() {
             <Preloader />
           </View>
         )}
-        <View style={styles.buttonboxLogIn}>
-          <Pressable
-            style={styles.buttonbox}
-            onPress={() => {
-              // navigate("/login")
-            }}
-          >
-            <ThemedText style={styles.colorWhite}>ВХІД</ThemedText>
-          </Pressable>
-        </View>
       </ScrollView>
     </LinearGradient>
   )

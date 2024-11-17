@@ -1,4 +1,5 @@
 import { PREFIX } from "@/constants/constants"
+//@ts-ignore next line
 import axios, { AxiosError } from "react-native-axios"
 
 export interface RegisterResponse {
@@ -30,8 +31,9 @@ export const setUser = async (
     })
     return data.data
   } catch (e) {
-    if (e instanceof AxiosError) {
-      return e.response?.data
-    }
+    // if (e instanceof AxiosError) {
+    //   return e.response?.data
+    // }
+    return e
   }
 }

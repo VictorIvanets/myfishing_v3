@@ -40,7 +40,7 @@ export const stylesMapPage = StyleSheet.create({
     width: "45%",
     height: 40,
     borderRadius: 2,
-    backgroundColor: "#071a22ba",
+    backgroundColor: "#00474f",
   },
   colorWhite: {
     color: "white",
@@ -52,11 +52,13 @@ export const stylesMapMarker = StyleSheet.create({
   containermarker: {
     borderRadius: 5,
     backgroundColor: "#071a22ba",
-    width: 220,
-    height: 100,
+    width: "100%",
+    height: "100%",
     padding: 5,
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    zIndex: 1000,
   },
   colorWhite: {
     color: "white",

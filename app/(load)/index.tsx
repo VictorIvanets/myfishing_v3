@@ -1,10 +1,16 @@
 import { ThemedText } from "@/components/ThemedText"
 import { useEffect, useState } from "react"
-import { View, Image, Alert, StatusBar } from "react-native"
+import { View, Image, Alert, StatusBar, ScrollView } from "react-native"
 import * as Location from "expo-location"
 import { LinearGradient } from "expo-linear-gradient"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
+import {
+  LOCAL_INIT_LAT,
+  LOCAL_INIT_LON,
+  LOCAL_JWT,
+  LOCAL_LOGIN,
+  LOCAL_USERID,
+} from "@/constants/constants"
 import { styles } from "./styles.loadpage"
 import { Link } from "expo-router"
 
@@ -19,17 +25,10 @@ export default function LoadPage() {
       const login = await AsyncStorage.getItem(LOCAL_LOGIN)
       const jwt = await AsyncStorage.getItem(LOCAL_JWT)
       const iserId = await AsyncStorage.getItem(LOCAL_USERID)
+      console.log(login, iserId)
       if (login !== null && jwt !== null && iserId !== null) {
-        setlocallStoreLogin(JSON.parse(login))
-        setlocallStoreJWT(JSON.parse(jwt))
-
-        // dispatch(
-        //   userActions.login({
-        //     login: JSON.parse(login),
-        //     userId: JSON.parse(iserId),
-        //     jwt: JSON.parse(jwt),
-        //   })
-        // )
+        setlocallStoreLogin(login)
+        setlocallStoreJWT(jwt)
       } else {
         setlocallStoreLogin(null)
         setlocallStoreJWT(null)
@@ -48,12 +47,8 @@ export default function LoadPage() {
       }
       const { coords } = await Location.getCurrentPositionAsync({})
       setLocation(coords)
-      // dispatch(
-      //   locationActions.setCoords({
-      //     latitude: coords?.latitude,
-      //     longitude: coords?.longitude,
-      //   })
-      // )
+      await AsyncStorage.setItem(LOCAL_INIT_LAT, `${coords?.latitude}`)
+      await AsyncStorage.setItem(LOCAL_INIT_LON, `${coords?.longitude}`)
     } catch {
       Alert.alert("Не можу визначити локацію")
     }
@@ -72,10 +67,7 @@ export default function LoadPage() {
   }
 
   return (
-    <LinearGradient
-      colors={["rgba(0, 98, 128, 0.719)", "transparent", "rgba(0,0,0,0.8)"]}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <StatusBar barStyle={"light-content"} />
 
       <Image
@@ -96,12 +88,6 @@ export default function LoadPage() {
         ) : (
           <ThemedText style={styles.colorWhite} type="default"></ThemedText>
         )}
-
-        <Link href="/(tabs)">
-          <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-            ВХІД
-          </ThemedText>
-        </Link>
         <View style={styles.linkFoLogin}>
           {!locallStoreLogin && !locallStoreJWT ? (
             <>
@@ -115,21 +101,23 @@ export default function LoadPage() {
                   РЕЄСТРАЦІЯ
                 </ThemedText>
               </Link>
+            </>
+          ) : (
+            <>
               <Link href="/(tabs)">
                 <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-                  MAIN_PAGE
+                  ВІТАЮ {locallStoreLogin}
+                </ThemedText>
+              </Link>
+              <Link href="/(tabs)">
+                <ThemedText type="default" style={styles.linkFoLoginText}>
+                  ТИСНИ ЩОБ ПРОДОВЖИТИ
                 </ThemedText>
               </Link>
             </>
-          ) : (
-            <Link href="/(tabs)">
-              <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-                ВХІД
-              </ThemedText>
-            </Link>
           )}
         </View>
       </View>
-    </LinearGradient>
+    </View>
   )
 }
