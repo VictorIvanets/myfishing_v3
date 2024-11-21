@@ -1,3 +1,4 @@
+import { colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
@@ -7,6 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.deepdark,
   },
   linkFoLoginText: {
     textAlign: "center",
@@ -61,22 +63,22 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     width: "100%",
+    zIndex: 2,
   },
   inputLabel: {
-    color: "rgba(255, 255, 255, 0.5)",
+    color: "white",
     position: "absolute",
     top: 13,
     left: 10,
     fontSize: 17,
-    zIndex: -1,
+    zIndex: 1,
   },
   inputLabelActiv: {
-    color: "rgba(255, 255, 255, 0.5)",
     position: "absolute",
     top: -10,
     left: 10,
     fontSize: 12,
-    zIndex: -1,
+    zIndex: 1,
   },
   inputpass: {
     width: "80%",
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   inputBottoLine: {
-    backgroundColor: "rgba(0, 98, 128, 0.9)",
+    backgroundColor: colors.light,
     width: "100%",
     height: 1,
   },

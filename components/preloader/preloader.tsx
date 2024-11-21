@@ -1,11 +1,12 @@
 import React from "react"
 import { ActivityIndicator, StyleSheet } from "react-native"
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
+import { colors } from "@/constants/Colors"
 
 const Preloader = () => (
   <SafeAreaProvider>
     <SafeAreaView style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size={200} color="rgba(0, 98, 128, 0.7)" />
+      <ActivityIndicator size={200} color={colors.light} />
     </SafeAreaView>
   </SafeAreaProvider>
 )

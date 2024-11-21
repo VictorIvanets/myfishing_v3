@@ -11,14 +11,20 @@ import { useEffect } from "react"
 import "react-native-reanimated"
 import * as NavigationBar from "expo-navigation-bar"
 import { useColorScheme } from "@/hooks/useColorScheme"
+import { colors } from "@/constants/Colors"
 
 SplashScreen.preventAutoHideAsync()
-NavigationBar.setBackgroundColorAsync("#010808")
+NavigationBar.setBackgroundColorAsync(colors.deepdark)
 
 export default function RootLayout() {
   const colorScheme = useColorScheme()
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Raleway: require("../assets/fonts/Raleway-VariableFont_wght.ttf"),
+    RalewayBold: require("../assets/fonts/Raleway-Bold.ttf"),
+    RalewayLight: require("../assets/fonts/Raleway-Light.ttf"),
+    RalewayRegular: require("../assets/fonts/Raleway-Regular.ttf"),
+    RalewayItalic: require("../assets/fonts/Raleway-Italic.ttf"),
   })
 
   useEffect(() => {

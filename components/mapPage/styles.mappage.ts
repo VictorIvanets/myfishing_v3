@@ -34,7 +34,7 @@ export const stylesMapPage = StyleSheet.create({
     width: "45%",
     height: 40,
     borderRadius: 2,
-    backgroundColor: "#071a22ba",
+    backgroundColor: colors.dark,
   },
   buttonactyve: {
     textAlign: "center",
@@ -42,7 +42,7 @@ export const stylesMapPage = StyleSheet.create({
     width: "45%",
     height: 40,
     borderRadius: 2,
-    backgroundColor: "#00474f",
+    backgroundColor: colors.dark,
   },
   colorWhite: {
     color: "white",

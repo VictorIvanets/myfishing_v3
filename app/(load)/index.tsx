@@ -13,6 +13,8 @@ import {
 } from "@/constants/constants"
 import styles from "./styles.loadpage"
 import { Link } from "expo-router"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import { colors } from "@/constants/Colors"
 
 export default function LoadPage() {
   const [location, setLocation] = useState<Location.LocationObjectCoords>()
@@ -25,7 +27,7 @@ export default function LoadPage() {
       const login = await AsyncStorage.getItem(LOCAL_LOGIN)
       const jwt = await AsyncStorage.getItem(LOCAL_JWT)
       const iserId = await AsyncStorage.getItem(LOCAL_USERID)
-      console.log(login, iserId)
+      // console.log(login, iserId)
       if (login !== null && jwt !== null && iserId !== null) {
         setlocallStoreLogin(login)
         setlocallStoreJWT(jwt)
@@ -67,13 +69,12 @@ export default function LoadPage() {
   }
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[colors.light, "transparent", colors.deepdark]}
+      style={styles.container}
+    >
       <StatusBar barStyle={"light-content"} />
 
-      <Image
-        source={require("@/assets/images/fonfish.jpg")}
-        style={styles.maifon}
-      />
       <View style={styles.appLogoBox}>
         <Image
           source={require("@/assets/images/logoMf-01.png")}
@@ -103,21 +104,18 @@ export default function LoadPage() {
               </Link>
             </>
           ) : (
-            <>
-              <Link href="/(tabs)">
-                <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-                  ВІТАЮ {locallStoreLogin}
-                </ThemedText>
-              </Link>
-              <Link href="/(tabs)">
-                <ThemedText type="default" style={styles.linkFoLoginText}>
-                  ТИСНИ ЩОБ ПРОДОВЖИТИ
-                </ThemedText>
-              </Link>
-            </>
+            <Link style={styles.buttonbox} href="/(tabs)">
+              <ThemedText type="default">ВІТАЮ {locallStoreLogin}</ThemedText>
+              <MaterialIcons
+                name="now-widgets"
+                size={70}
+                color={colors.light}
+              />
+              <ThemedText type="default">ВХІД</ThemedText>
+            </Link>
           )}
         </View>
       </View>
-    </View>
+    </LinearGradient>
   )
 }

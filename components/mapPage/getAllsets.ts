@@ -20,6 +20,8 @@ export const getAllSets = async () => {
     const data = await axios.get<MapResponse[]>(
       `${PREFIX}fishsets/all/database`
     )
+    console.log("getAllSets LOAD")
+
     return data.data
   } catch (e) {
     // if (e instanceof AxiosError) {
