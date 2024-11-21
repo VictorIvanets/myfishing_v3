@@ -21,10 +21,16 @@ import {
 import { useNavigation } from "expo-router"
 import { ThemedText } from "@/components/ThemedText"
 import { getAllSets, MapResponse } from "../../components/mapPage/getAllsets"
-import MapMarker from "../../components/mapPage/setMarker"
+import MapMarker from "../../components/oneSetPage/oneSetPage"
 import NewSetMapMarker from "../../components/mapPage/newSetMarker"
-import { LOCAL_INIT_LAT, LOCAL_INIT_LON } from "@/constants/constants"
+import {
+  LOCAL_INIT_LAT,
+  LOCAL_INIT_LON,
+  LOCAL_LOGIN,
+} from "@/constants/constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import OneSetPage from "../../components/oneSetPage/oneSetPage"
+import { colors } from "@/constants/Colors"
 
 interface MarkerProps {
   latitude: number
@@ -41,15 +47,13 @@ export interface SetCoordsProps {
 export default function MapPage() {
   const [customMarker, setCustomeMarker] = useState<MarkerProps | null>()
   const [allSetsMarkers, setAllSetsMarkers] = useState<MapResponse[] | null>()
-
   const [latitude, setLatitude] = useState<number>()
   const [longitude, setLongitude] = useState<number>()
-
   const [viewSetMarker, setViewSetMarker] = useState<SetCoordsProps | null>(
     null
   )
   const [viewOneSetById, setViewOneSetById] = useState<number | null>(null)
-
+  const [userLogin, setUserLogin] = useState<string>()
   const [btnViewAll, setBtnViewAll] = useState<boolean>(true)
   const [btnViewOne, setBtnViewOne] = useState<boolean>(false)
 
@@ -62,11 +66,19 @@ export default function MapPage() {
 
   useEffect(() => {
     localGetUserId()
+    localGetUserLogin()
   }, [])
 
-  // const calloutPressed = (e: CalloutPressEvent) => {
-  //   console.log(e)
-  // }
+  async function localGetUserLogin() {
+    try {
+      const login = await AsyncStorage.getItem(LOCAL_LOGIN)
+      if (login !== null) {
+        setUserLogin(login)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const onRegionChange = (region: Region) => {
     setCustomeMarker(region)
@@ -88,17 +100,18 @@ export default function MapPage() {
 
   return (
     <LinearGradient
-      colors={["rgba(0, 98, 128, 0.719)", "transparent", "rgba(0,0,0,0.8)"]}
+      colors={[colors.light, "transparent", colors.deepdark]}
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"} />
       {viewOneSetById ? (
-        <MapMarker
+        <OneSetPage
           setViewOneSetById={setViewOneSetById}
-          marker={viewOneSetById}
+          setId={viewOneSetById}
         />
       ) : viewSetMarker ? (
         <NewSetMapMarker
+          login={userLogin}
           coords={viewSetMarker}
           setViewSetMarker={setViewSetMarker}
         />

@@ -4,6 +4,7 @@ export const LOCAL_PASSWORD = "mfpassword"
 export const LOCAL_JWT = "mfjwt"
 export const LOCAL_INIT_LAT = "mfinitlat"
 export const LOCAL_INIT_LON = "mfinitlon"
+export const LOCAL_THEME = "mftheme"
 
 // export const PREFIX = "http://localhost:5550/api/"
 // export const PREFIX_STATIC = "http://localhost:5550/"

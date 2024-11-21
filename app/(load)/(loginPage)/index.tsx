@@ -7,6 +7,8 @@ import Preloader from "@/components/preloader/preloader"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
 import { Link, useNavigation } from "expo-router"
+import { LinearGradient } from "expo-linear-gradient"
+import { colors } from "@/constants/Colors"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -65,12 +67,12 @@ export default function LoginPage() {
   }
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[colors.light, "transparent", colors.deepdark]}
+      style={styles.container}
+    >
       <StatusBar barStyle={"light-content"} />
-      <Image
-        source={require("@/assets/images/fonfish.jpg")}
-        style={styles.maifon}
-      />
+
       <View style={styles.appLogoBox}>
         <Image
           source={require("@/assets/images/logoMf-01.png")}
@@ -153,6 +155,6 @@ export default function LoginPage() {
           <Preloader />
         </View>
       )}
-    </View>
+    </LinearGradient>
   )
 }

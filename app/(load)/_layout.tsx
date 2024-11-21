@@ -2,12 +2,12 @@ import { Tabs } from "expo-router"
 import React from "react"
 import { Platform, StatusBar, View } from "react-native"
 
-import { HapticTab } from "@/components/HapticTab"
 import { IconSymbol } from "@/components/ui/IconSymbol"
 import TabBarBackground from "@/components/ui/TabBarBackground"
-import { Colors } from "@/constants/Colors"
+import { colors, Colors } from "@/constants/Colors"
 import { useColorScheme } from "@/hooks/useColorScheme"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import { HapticTab } from "@/components/ui/HapticTab"
 
 export default function TabLayout() {
   return (
@@ -15,14 +15,14 @@ export default function TabLayout() {
       screenOptions={{
         tabBarShowLabel: true,
 
-        tabBarActiveTintColor: "#00acac",
-        tabBarInactiveTintColor: "#00474f",
+        tabBarActiveTintColor: colors.light,
+        tabBarInactiveTintColor: colors.dark,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: {
-          backgroundColor: "#010808",
-          borderColor: "#010808",
+          backgroundColor: colors.deepdark,
+          borderColor: colors.deepdark,
           height: 0,
         },
       }}

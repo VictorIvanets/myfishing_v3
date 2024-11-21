@@ -13,6 +13,7 @@ import { useEffect, useState } from "react"
 import setUser from "./register"
 import Preloader from "@/components/preloader/preloader"
 import { Link } from "expo-router"
+import { colors } from "@/constants/Colors"
 
 export default function RegisterPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -104,14 +105,10 @@ export default function RegisterPage() {
 
   return (
     <LinearGradient
-      colors={["rgba(0, 98, 128, 0.719)", "transparent", "rgba(0,0,0,0.8)"]}
+      colors={[colors.light, "transparent", colors.deepdark]}
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"} />
-      <Image
-        source={require("@/assets/images/fonfish.jpg")}
-        style={styles.maifon}
-      />
 
       <ScrollView style={styles.mainscroll}>
         <View style={styles.appLogoBox}>

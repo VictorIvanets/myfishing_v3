@@ -1,3 +1,4 @@
+import { colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
@@ -6,6 +7,7 @@ const styles = StyleSheet.create({
     padding: 0,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.deepdark,
   },
   colorWhite: {
     color: "white",
@@ -44,6 +46,15 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     zIndex: -1,
+  },
+  buttonbox: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 100,
+    height: 100,
+    borderRadius: 7,
+    backgroundColor: colors.dark,
+    marginBottom: 10,
   },
 })
 

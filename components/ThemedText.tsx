@@ -1,4 +1,5 @@
 import { Text, type TextProps, StyleSheet } from "react-native"
+import { colors } from "@/constants/Colors"
 
 export type ThemedTextProps = TextProps & {
   type?:
@@ -35,16 +36,17 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   default: {
-    fontFamily: "Raleway",
+    fontFamily: "RalewayRegular",
     fontSize: 16,
     lineHeight: 24,
-    color: "#a5c9d4",
+    color: colors.lightText,
+    fontWeight: "400",
   },
   mintext: {
-    fontFamily: "Raleway",
+    fontFamily: "RalewayRegular",
     fontSize: 12,
-    lineHeight: 24,
-    color: "#a5c9d4",
+    lineHeight: 14,
+    color: colors.lightText,
     fontWeight: "400",
   },
   defaultSemiBold: {
@@ -52,31 +54,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontWeight: "600",
-    color: "#a5c9d4",
+    color: colors.lightText,
   },
   title: {
     fontFamily: "Raleway",
     fontSize: 32,
     fontWeight: "bold",
     lineHeight: 32,
-    color: "#a5c9d4",
+    color: colors.lightText,
   },
   subtitle: {
     fontFamily: "Raleway",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#a5c9d4",
+    color: colors.lightText,
   },
   subtitleLite: {
     fontFamily: "Raleway",
     fontSize: 20,
     fontWeight: "200",
-    color: "#a5c9d4",
+    color: colors.lightText,
   },
   link: {
     fontFamily: "Raleway",
     lineHeight: 30,
     fontSize: 16,
-    color: "#a5c9d4",
+    color: colors.lightText,
   },
 })
