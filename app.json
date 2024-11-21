@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MYF",
-    "slug": "myf",
+    "name": "myfishing",
+    "slug": "myfishing",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -48,7 +48,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "0c895089-1f37-4760-ab5c-3de1ae8c1fc5"
+        "projectId": "fb9fe7cd-0804-412c-8645-55fb15e8b9af"
       }
     },
     "owner": "victorivanets"

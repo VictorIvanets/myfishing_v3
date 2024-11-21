@@ -21,7 +21,6 @@ const getOneSetsByUser = async (
 ): Promise<MapResponse[] | string> => {
   try {
     const data = await axios.get<MapResponse[]>(`${PREFIX}fishsets/${login}`)
-    console.log("getOneSetsByUser LOAD")
     return data.data
   } catch (e) {
     console.log(e)

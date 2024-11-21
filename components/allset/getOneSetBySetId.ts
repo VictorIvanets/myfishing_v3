@@ -10,7 +10,6 @@ const getOneSetsBySetId = async (
     const data = await axios.get<MapResponse>(
       `${PREFIX}fishsets/onesets/${setId}`
     )
-    console.log("getOneSetsBySetId LOAD")
     return data.data
   } catch (e) {
     console.log(e)

@@ -21,7 +21,6 @@ const allGetSets = async (): Promise<MapResponse[] | string> => {
     const data = await axios.get<MapResponse[]>(
       `${PREFIX}fishsets/all/database`
     )
-    console.log("allGetSets LOAD")
     return data.data
   } catch (e) {
     console.log(e)

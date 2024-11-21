@@ -9,6 +9,7 @@ import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
 import { Link, useNavigation } from "expo-router"
 import { LinearGradient } from "expo-linear-gradient"
 import { colors } from "@/constants/Colors"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -137,15 +138,19 @@ export default function LoginPage() {
             </>
           ) : (
             <>
-              <Link href="/(tabs)">
-                <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-                  ВІТАЮ
-                </ThemedText>
-              </Link>
-              <Link href="/(tabs)">
-                <ThemedText type="default" style={styles.linkFoLoginText}>
-                  ТИСНИ ЩОБ ПРОДОВЖИТИ
-                </ThemedText>
+              <Link style={styles.buttonboxlink} href="/(tabs)">
+                <View style={styles.buttonboxres}>
+                  <MaterialIcons
+                    style={styles.icon}
+                    name="now-widgets"
+                    size={70}
+                    color={colors.light}
+                  />
+                  <ThemedText type="default">ВІТАЮ</ThemedText>
+                  <ThemedText style={{ textAlign: "center" }} type="mintext">
+                    ТИСНИ ЩОБ ПРОДОВЖИТИ
+                  </ThemedText>
+                </View>
               </Link>
             </>
           )}

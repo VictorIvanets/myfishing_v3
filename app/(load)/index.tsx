@@ -93,9 +93,11 @@ export default function LoadPage() {
           {!locallStoreLogin && !locallStoreJWT ? (
             <>
               <Link href="/(load)/(loginPage)">
-                <ThemedText type="subtitle" style={styles.linkFoLoginText}>
-                  ВХІД
-                </ThemedText>
+                <View style={styles.buttonbox}>
+                  <ThemedText type="subtitle" style={styles.linkFoLoginText}>
+                    ВХІД
+                  </ThemedText>
+                </View>
               </Link>
               <Link href="/(load)/(registerPage)">
                 <ThemedText type="default" style={styles.linkFoLoginText}>
@@ -104,14 +106,16 @@ export default function LoadPage() {
               </Link>
             </>
           ) : (
-            <Link style={styles.buttonbox} href="/(tabs)">
-              <ThemedText type="default">ВІТАЮ {locallStoreLogin}</ThemedText>
-              <MaterialIcons
-                name="now-widgets"
-                size={70}
-                color={colors.light}
-              />
-              <ThemedText type="default">ВХІД</ThemedText>
+            <Link style={styles.buttonboxlink} href="/(tabs)">
+              <View style={styles.buttonbox}>
+                <MaterialIcons
+                  style={styles.icon}
+                  name="now-widgets"
+                  size={70}
+                  color={colors.light}
+                />
+                <ThemedText type="default">ВХІД</ThemedText>
+              </View>
             </Link>
           )}
         </View>

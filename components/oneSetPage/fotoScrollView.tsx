@@ -28,9 +28,6 @@ export default function FotoScrollView({ img, setId }: ScrollProps) {
     }
   }, [img, setFotoInFolder, setId])
 
-  console.log(setId)
-  console.log(fotoInFolder)
-
   return (
     <>
       {fotoInFolder ? (
@@ -69,7 +66,6 @@ export async function loadFotoInFolder(
 ): Promise<string | string[]> {
   try {
     const { data } = await axios.get<string[]>(`${PREFIX}getfoto/get/${setId}`)
-    // console.log(data)
     return data
   } catch (e) {
     // console.log(e)

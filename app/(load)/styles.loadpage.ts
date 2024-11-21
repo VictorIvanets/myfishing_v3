@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     justifyContent: "space-between",
-    width: 150,
-    height: 50,
+    width: "100%",
+    // height: 50,
   },
   linkFoLoginText: {
     textAlign: "center",
@@ -36,8 +36,6 @@ const styles = StyleSheet.create({
   appLogo: {
     height: 108,
     width: 200,
-    bottom: 0,
-    position: "absolute",
   },
   maifon: {
     width: "100%",
@@ -50,11 +48,20 @@ const styles = StyleSheet.create({
   buttonbox: {
     justifyContent: "center",
     alignItems: "center",
-    width: 100,
-    height: 100,
+    textAlign: "center",
+    width: 120,
+    height: 130,
     borderRadius: 7,
-    backgroundColor: colors.dark,
+    // backgroundColor: colors.dark,
     marginBottom: 10,
+  },
+  buttonboxlink: {
+    width: 120,
+    height: 140,
+  },
+  icon: {
+    width: 70,
+    height: 70,
   },
 })
 

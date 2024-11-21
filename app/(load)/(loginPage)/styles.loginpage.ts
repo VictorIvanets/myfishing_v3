@@ -125,8 +125,24 @@ const styles = StyleSheet.create({
   appLogo: {
     height: 108,
     width: 200,
-    // bottom: 0,
-    // position: "absolute",
+  },
+  buttonboxres: {
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    width: 120,
+    height: 130,
+    borderRadius: 7,
+    // backgroundColor: colors.dark,
+    marginBottom: 10,
+  },
+  buttonboxlink: {
+    width: 120,
+    height: 140,
+  },
+  icon: {
+    width: 70,
+    height: 70,
   },
 })
 

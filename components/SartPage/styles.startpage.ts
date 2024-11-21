@@ -14,7 +14,7 @@ export const stylesStartPage = StyleSheet.create({
   },
   content: {
     width: "100%",
-    padding: 5,
+    padding: 20,
   },
   contentText: {
     textAlign: "left",

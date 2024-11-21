@@ -42,7 +42,7 @@ export const stylesMapPage = StyleSheet.create({
     width: "45%",
     height: 40,
     borderRadius: 2,
-    backgroundColor: colors.dark,
+    backgroundColor: colors.light,
   },
   colorWhite: {
     color: "white",

@@ -1,7 +1,6 @@
 import { ThemedText } from "@/components/ThemedText"
 import { View, Text, Image, Pressable, Button, ScrollView } from "react-native"
 import { default as styles } from "./styles.oneSetPage"
-import { MapResponse } from "../mapPage/getAllsets"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import getOneSetsBySetId from "../allset/getOneSetBySetId"
 import { Link } from "expo-router"
@@ -9,6 +8,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@/constants/Colors"
 import FotoScrollView from "./fotoScrollView"
 import Weather from "./weather"
+import { MapResponse } from "../allset/getAllset"
 
 type OneSetPage = {
   setId: number
