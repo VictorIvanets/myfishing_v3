@@ -15,10 +15,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.10",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
+    "apollo-link-ws": "^1.0.20",
     "axios": "^1.7.7",
     "expo": "~52.0.6",
     "expo-blur": "~14.0.1",
@@ -35,6 +37,7 @@
     "expo-symbols": "~0.2.0",
     "expo-system-ui": "~4.0.2",
     "expo-web-browser": "~14.0.1",
+    "graphql": "^16.9.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.1",
