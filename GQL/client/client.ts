@@ -6,8 +6,9 @@ import {
 } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { getMainDefinition } from "@apollo/client/utilities"
-import { PREFIX_STATIC } from "@/constants/constants"
+import { LOCAL_JWT, PREFIX_STATIC } from "@/constants/constants"
 import { WebSocketLink } from "@apollo/client/link/ws"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const wsLink = new WebSocketLink({
   uri: `${PREFIX_STATIC}graphql`,
@@ -21,7 +22,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("tokengql")
+  const token = AsyncStorage.getItem(LOCAL_JWT)
   return {
     headers: {
       ...headers,

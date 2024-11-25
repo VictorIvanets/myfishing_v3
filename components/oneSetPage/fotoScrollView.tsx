@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { PREFIX, PREFIX_STATIC } from "@/constants/constants"
 //@ts-ignore next line
 import axios, { AxiosError } from "react-native-axios"
-import { Image, ScrollView } from "react-native"
+import { Image, ScrollView, View } from "react-native"
 import { default as styles } from "../oneSetPage/styles.oneSetPage"
 import Preloader from "../preloader/preloader"
 
@@ -26,34 +26,33 @@ export default function FotoScrollView({ img, setId }: ScrollProps) {
         }, 2000)
       )
     }
-  }, [img, setFotoInFolder, setId])
+  }, [img, setId])
 
   return (
     <>
       {fotoInFolder ? (
-        <ScrollView
-          contentContainerStyle={styles.photoboxContentContainer}
-          style={styles.photobox}
-        >
-          {fotoInFolder &&
-            fotoInFolder.map((i) => {
-              const url = `${PREFIX_STATIC}static/${setId}/${i}`
-              return (
-                <Image
-                  key={i}
-                  source={{
-                    uri: url,
-                  }}
-                  style={{
-                    width: "100%",
-                    height: 400,
-                    marginBottom: 10,
-                    resizeMode: "contain",
-                  }}
-                />
-              )
-            })}
-        </ScrollView>
+        <View style={styles.photobox}>
+          <ScrollView contentContainerStyle={styles.photoboxContentContainer}>
+            {fotoInFolder &&
+              fotoInFolder.map((i) => {
+                const url = `${PREFIX_STATIC}static/${setId}/${i}`
+                return (
+                  <Image
+                    key={i}
+                    source={{
+                      uri: url,
+                    }}
+                    style={{
+                      width: "100%",
+                      height: 400,
+                      marginBottom: 10,
+                      resizeMode: "contain",
+                    }}
+                  />
+                )
+              })}
+          </ScrollView>
+        </View>
       ) : (
         <Preloader />
       )}

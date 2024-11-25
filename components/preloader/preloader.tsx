@@ -24,3 +24,11 @@ const styles = StyleSheet.create({
 })
 
 export default Preloader
+
+export const PreloaderMin = () => (
+  <SafeAreaProvider>
+    <SafeAreaView style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size={40} color={colors.light} />
+    </SafeAreaView>
+  </SafeAreaProvider>
+)

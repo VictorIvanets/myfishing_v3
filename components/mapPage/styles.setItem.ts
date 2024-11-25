@@ -71,12 +71,8 @@ const stylesSetItem = StyleSheet.create({
   },
   inputText: {
     color: "rgba(255, 255, 255, 0.8)",
-    // height: "100%",
-    // backgroundColor: "red",
-    // backgroundColor: "none",
     padding: 10,
     fontSize: 20,
-    // width: "100%",
   },
   inputBlockText: {
     width: "100%",
