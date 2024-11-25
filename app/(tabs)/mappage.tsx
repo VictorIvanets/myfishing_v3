@@ -108,6 +108,7 @@ export default function MapPage() {
         <OneSetPage
           setViewOneSetById={setViewOneSetById}
           setId={viewOneSetById}
+          login={userLogin}
         />
       ) : viewSetMarker ? (
         <NewSetMapMarker
@@ -152,7 +153,7 @@ export default function MapPage() {
                   </Callout> */}
                     </Marker>
                   ))}
-                {customMarker && (
+                {customMarker && !allSetsMarkers && (
                   <Marker
                     title={"ДОДАТИ МІСЦЕ"}
                     coordinate={customMarker}

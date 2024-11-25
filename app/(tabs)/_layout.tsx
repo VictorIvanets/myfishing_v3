@@ -7,6 +7,7 @@ import { useColorScheme } from "@/hooks/useColorScheme"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { colors } from "@/constants/Colors"
 import { HapticTab } from "@/components/ui/HapticTab"
+import Entypo from "@expo/vector-icons/Entypo"
 
 export default function TabLayout() {
   const colorScheme = useColorScheme()
@@ -66,6 +67,19 @@ export default function TabLayout() {
           },
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="map" size={42} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="startchat"
+        options={{
+          title: "ЧАТ",
+          tabBarIconStyle: {
+            width: 45,
+            height: 45,
+          },
+          tabBarIcon: ({ color }) => (
+            <Entypo name="chat" size={40} color={color} />
           ),
         }}
       />

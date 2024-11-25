@@ -27,6 +27,9 @@ export default function AllSetPage() {
   const [userLogin, setUserLogin] = useState<string>()
   const [allset, setAllset] = useState<MapResponse[]>([])
   const [setIdforOneItem, setSetIdforOneItem] = useState<number | null>(null)
+  const [setLoginforOneItem, setSetLoginforOneItem] = useState<number | null>(
+    null
+  )
   const [hendDelSet, sethendDelSet] = useState<boolean>(false)
 
   async function localGetUserLogin() {
@@ -91,6 +94,7 @@ export default function AllSetPage() {
             <OneSetPage
               setId={setIdforOneItem}
               setSetIdforOneItem={setSetIdforOneItem}
+              login={userLogin}
             />
           )}
         </>

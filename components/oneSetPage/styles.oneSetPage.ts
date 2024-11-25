@@ -6,23 +6,32 @@ const stylesOneSet = StyleSheet.create({
     backgroundColor: colors.deepdark,
     width: "100%",
     height: "100%",
-    padding: 7,
-    paddingTop: 20,
-    paddingBottom: 0,
+    paddingTop: 25,
     justifyContent: "space-between",
     alignItems: "center",
   },
-  contentbox: {
+
+  ScrollViewbox: {
     width: "100%",
-    height: "30%",
-    justifyContent: "center",
-    alignItems: "flex-start",
+    height: "27%",
+  },
+
+  contentbox: {
+    paddingHorizontal: 10,
+    width: "100%",
+    height: 200,
   },
   photobox: {
     width: "100%",
+    height: "60%",
   },
   photoboxContentContainer: {
     justifyContent: "center",
+    alignItems: "center",
+  },
+  bootombox: {
+    width: 80,
+    height: 40,
     alignItems: "center",
   },
 
@@ -31,14 +40,9 @@ const stylesOneSet = StyleSheet.create({
     backgroundColor: colors.light,
     marginBottom: 10,
   },
-  bootombox: {
-    width: "100%",
-    alignItems: "center",
-    padding: 10,
-  },
   colorWhite: {
     color: colors.lightText,
-    textAlign: "center",
+    lineHeight: 18,
   },
   colorLink: {
     color: "rgba(0, 98, 128, 0.9)",
@@ -48,26 +52,35 @@ const stylesOneSet = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    alignContent: "center",
+    textAlign: "center",
     width: 150,
     height: 60,
-    gap: 10,
+    gap: 5,
     backgroundColor: colors.light,
     borderRadius: 5,
+  },
+  buttonSelectBox: {
+    width: "100%",
+    height: 40,
+    flexDirection: "row",
+    alignContent: "space-around",
+    justifyContent: "space-around",
+    gap: 10,
   },
   buttonbox: {
     textAlign: "center",
     justifyContent: "center",
-    width: 300,
-    height: 50,
+    width: 80,
+    height: 40,
     borderRadius: 7,
     backgroundColor: colors.dark,
-    marginBottom: 10,
   },
   inputBottoLine: {
     backgroundColor: "rgba(0, 98, 128, 0.9)",
     width: "100%",
     height: 1,
-    marginTop: 10,
+    marginVertical: 3,
   },
   weatherbox: {
     width: 160,
@@ -77,6 +90,7 @@ const stylesOneSet = StyleSheet.create({
     borderRadius: 5,
     alignItems: "flex-start",
     justifyContent: "center",
+    marginBottom: 7,
   },
   widgetbox: {
     flexDirection: "row",
@@ -86,6 +100,62 @@ const stylesOneSet = StyleSheet.create({
   },
   widgetText: {
     color: colors.deepdark,
+  },
+  comment: {
+    width: "95%",
+    borderColor: colors.deepgray,
+    borderWidth: 2,
+    backgroundColor: colors.gray,
+    padding: 5,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  commentText: {
+    color: colors.deepdark,
+    textAlign: "left",
+  },
+  btndel: {
+    width: 27,
+    height: 27,
+    backgroundColor: colors.light,
+    position: "absolute",
+    top: -7,
+    right: -3,
+    borderRadius: 27,
+    zIndex: 2,
+  },
+  addcommentbox: {
+    width: "100%",
+    height: 70,
+    padding: 5,
+  },
+  addcommentscontetnt: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 2,
+  },
+  inputBlockText: {
+    width: "80%",
+    height: "100%",
+    borderRadius: 5,
+    backgroundColor: colors.gray,
+  },
+  sendBlockText: {
+    width: "15%",
+    height: "100%",
+    borderRadius: 5,
+    justifyContent: "center",
+  },
+  inputText: {
+    color: "rgba(30, 30, 30)",
+    paddingVertical: 3,
+    paddingHorizontal: 10,
+    paddingBottom: 0,
+    fontSize: 16,
+    zIndex: 2,
   },
 })
 
