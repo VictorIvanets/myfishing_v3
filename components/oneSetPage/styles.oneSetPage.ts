@@ -71,7 +71,7 @@ const stylesOneSet = StyleSheet.create({
   buttonbox: {
     textAlign: "center",
     justifyContent: "center",
-    width: 80,
+    width: 70,
     height: 40,
     borderRadius: 7,
     backgroundColor: colors.dark,
@@ -100,6 +100,8 @@ const stylesOneSet = StyleSheet.create({
   },
   widgetText: {
     color: colors.deepdark,
+    fontFamily: "RobotoRegular",
+    fontWeight: 400,
   },
   comment: {
     width: "95%",
@@ -156,6 +158,11 @@ const stylesOneSet = StyleSheet.create({
     paddingBottom: 0,
     fontSize: 16,
     zIndex: 2,
+  },
+  linkUpload: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
   },
 })
 

@@ -1,6 +1,13 @@
 import { ThemedText } from "@/components/ThemedText"
 import React, { useEffect, useState } from "react"
-import { TextInput, View, Image, Pressable, StatusBar } from "react-native"
+import {
+  TextInput,
+  View,
+  Image,
+  Pressable,
+  StatusBar,
+  Animated,
+} from "react-native"
 import getlogin from "./authGet"
 import styles from "./styles.loginpage"
 import Preloader from "@/components/preloader/preloader"
@@ -10,6 +17,11 @@ import { Link, useNavigation } from "expo-router"
 import { LinearGradient } from "expo-linear-gradient"
 import { colors } from "@/constants/Colors"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import Ionicons from "@expo/vector-icons/Ionicons"
+import { transform } from "@babel/core"
+import useButtonAnime from "@/components/anime.button"
+import ButtonAnimeView from "@/components/anime.button"
+import AlertError from "@/components/alertError"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -20,6 +32,7 @@ export default function LoginPage() {
   const [errorAuth, setErrorAuth] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [loginOk, setloginOk] = useState(false)
+  const [passVisible, setPassVisible] = useState(false)
 
   useEffect(() => {
     if (errorAuth) setErrorAuth("")
@@ -27,6 +40,15 @@ export default function LoginPage() {
       setValidInput("")
     }
   }, [loginInput, passwordInput, setValidInput])
+
+  useEffect(() => {
+    if (errorAuth || validInput) {
+      setTimeout(() => {
+        setErrorAuth("")
+        setValidInput("")
+      }, 2000)
+    }
+  }, [errorAuth, validInput])
 
   useEffect(() => {
     if (loginInput.length > 0) setViewLabelLogin(false)
@@ -83,17 +105,9 @@ export default function LoginPage() {
       {!isLoading ? (
         <View style={styles.submitbox}>
           <View style={styles.buttonboxback}></View>
-          {validInput ? (
-            <ThemedText style={styles.colorWhite} type="default">
-              {validInput}
-            </ThemedText>
-          ) : errorAuth ? (
-            <ThemedText style={styles.colorWhite} type="default">
-              {errorAuth}
-            </ThemedText>
-          ) : (
-            <ThemedText style={styles.colorWhite} type="default"></ThemedText>
-          )}
+          <AlertError
+            error={validInput ? validInput : errorAuth ? errorAuth : undefined}
+          />
           {!loginOk ? (
             <>
               <View style={styles.inputpass}>
@@ -117,6 +131,7 @@ export default function LoginPage() {
 
               <View style={styles.inputpass}>
                 <TextInput
+                  secureTextEntry={!passVisible}
                   style={styles.input}
                   onChangeText={(t) => setPasswordInput(t)}
                   value={passwordInput}
@@ -131,10 +146,21 @@ export default function LoginPage() {
                 >
                   password
                 </ThemedText>
+                <Pressable
+                  onPress={() => setPassVisible(!passVisible)}
+                  style={styles.passwordVisible}
+                >
+                  {passVisible ? (
+                    <Ionicons name="eye" size={24} color={colors.light} />
+                  ) : (
+                    <Ionicons name="eye-off" size={24} color={colors.light} />
+                  )}
+                </Pressable>
               </View>
-              <Pressable style={styles.buttonbox} onPress={onSubmit}>
+
+              <ButtonAnimeView onPress={onSubmit}>
                 <ThemedText style={styles.colorWhite}>ВХІД</ThemedText>
-              </Pressable>
+              </ButtonAnimeView>
             </>
           ) : (
             <>

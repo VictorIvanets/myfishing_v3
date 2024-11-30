@@ -14,6 +14,8 @@ import setUser from "./register"
 import Preloader from "@/components/preloader/preloader"
 import { Link } from "expo-router"
 import { colors } from "@/constants/Colors"
+import ButtonAnimeView from "@/components/anime.button"
+import AlertError from "@/components/alertError"
 
 export default function RegisterPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -102,6 +104,14 @@ export default function RegisterPage() {
       }
     }
   }
+  useEffect(() => {
+    if (errorAuth || validInput) {
+      setTimeout(() => {
+        setErrorAuth("")
+        setValidInput("")
+      }, 2000)
+    }
+  }, [errorAuth, validInput])
 
   return (
     <LinearGradient
@@ -125,20 +135,15 @@ export default function RegisterPage() {
                   REGISTER
                 </ThemedText>
                 <View style={styles.submitboxInput}>
-                  {validInput ? (
-                    <ThemedText style={styles.colorWhite} type="default">
-                      {validInput}
-                    </ThemedText>
-                  ) : errorAuth ? (
-                    <ThemedText style={styles.colorWhite} type="default">
-                      {errorAuth}
-                    </ThemedText>
-                  ) : (
-                    <ThemedText
-                      style={styles.colorWhite}
-                      type="default"
-                    ></ThemedText>
-                  )}
+                  <AlertError
+                    error={
+                      validInput
+                        ? validInput
+                        : errorAuth
+                        ? errorAuth
+                        : undefined
+                    }
+                  />
 
                   <View style={styles.inputpass}>
                     <TextInput
@@ -256,9 +261,9 @@ export default function RegisterPage() {
                       city
                     </ThemedText>
                   </View>
-                  <Pressable style={styles.buttonbox} onPress={onSubmit}>
+                  <ButtonAnimeView onPress={onSubmit}>
                     <ThemedText style={styles.colorWhite}>SUBMIT</ThemedText>
-                  </Pressable>
+                  </ButtonAnimeView>
                 </View>
               </View>
             ) : (

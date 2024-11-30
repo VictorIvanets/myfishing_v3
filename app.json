@@ -8,6 +8,12 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "backgroundColor": "#03171c",
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#03171c"
+    },
     "ios": {
       "supportsTablet": true,
       "config": {
@@ -17,7 +23,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#014c55"
+        "backgroundColor": "#03171c"
       },
       "config": {
         "googleMaps": {
@@ -39,7 +45,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#014c55"
+          "backgroundColor": "#03171c"
         }
       ]
     ],

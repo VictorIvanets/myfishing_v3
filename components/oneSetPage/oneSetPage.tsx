@@ -10,6 +10,7 @@ import FotoScrollView from "./fotoScrollView"
 import Weather from "./weather"
 import { MapResponse } from "../allset/getAllset"
 import CommentScrollView from "./comments/commetsSetPage"
+import UploadPhoto from "../upload/upload.component"
 
 type OneSetPage = {
   login: string | undefined
@@ -21,7 +22,9 @@ type OneSetPage = {
 export default function OneSetPage(props: OneSetPage) {
   const { setId, setViewOneSetById, setSetIdforOneItem, login } = props
   const [oneSet, setOneSet] = useState<MapResponse | null>(null)
-  const [photoCommSelect, setPhotoCommSelect] = useState<boolean>(true)
+  const [photoSelect, setPhotoSelect] = useState<boolean>(true)
+  const [photoUploadSelect, setPhotoUploadSelect] = useState<boolean>(false)
+  const [commentSelect, setCommentSelect] = useState<boolean>(false)
 
   async function GetSet(setId: number) {
     const data = await getOneSetsBySetId(setId)
@@ -78,17 +81,24 @@ export default function OneSetPage(props: OneSetPage) {
             </ScrollView>
           </View>
           <View style={styles.inputBottoLine}></View>
-          {photoCommSelect ? (
+          {photoSelect && (
             <FotoScrollView img={oneSet.img} setId={oneSet.setID} />
-          ) : (
-            login && <CommentScrollView login={login} setId={setId} />
           )}
+          {login && commentSelect && (
+            <CommentScrollView login={login} setId={setId} />
+          )}
+          {login && photoUploadSelect && <UploadPhoto setID={setId} />}
+
           <View style={styles.inputBottoLine}></View>
           <View style={styles.buttonSelectBox}>
             <View style={styles.bootombox}>
               <Pressable
                 style={styles.buttonbox}
-                onPress={() => setPhotoCommSelect(true)}
+                onPress={() => {
+                  setPhotoSelect(true)
+                  setPhotoUploadSelect(false)
+                  setCommentSelect(false)
+                }}
               >
                 <MaterialIcons
                   style={{ textAlign: "center", justifyContent: "center" }}
@@ -101,7 +111,30 @@ export default function OneSetPage(props: OneSetPage) {
             <View style={styles.bootombox}>
               <Pressable
                 style={styles.buttonbox}
-                onPress={() => setPhotoCommSelect(false)}
+                onPress={() => {
+                  {
+                    setPhotoSelect(false)
+                    setPhotoUploadSelect(true)
+                    setCommentSelect(false)
+                  }
+                }}
+              >
+                <MaterialIcons
+                  style={{ textAlign: "center", justifyContent: "center" }}
+                  name="add-photo-alternate"
+                  size={40}
+                  color={colors.light}
+                />
+              </Pressable>
+            </View>
+            <View style={styles.bootombox}>
+              <Pressable
+                style={styles.buttonbox}
+                onPress={() => {
+                  setPhotoSelect(false)
+                  setPhotoUploadSelect(false)
+                  setCommentSelect(true)
+                }}
               >
                 <MaterialIcons
                   style={{ textAlign: "center", justifyContent: "center" }}

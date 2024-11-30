@@ -6,8 +6,10 @@ export const colors = {
   lightText: "#cecece",
   dark: "#014e63",
   deepdark: "#03171c",
+  // deepdark: "#1d1e1f",
   deepgray: "#4f4f4f",
   gray: "#b8b8b8",
+  black: "black",
 }
 
 const tintColorLight = "#0a7ea4"

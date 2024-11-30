@@ -91,14 +91,21 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 1,
   },
-  buttonbox: {
+
+  buttonPress: {
     textAlign: "center",
     justifyContent: "center",
     width: "80%",
     height: 50,
-    borderRadius: 7,
-    backgroundColor: "#071a22ba",
+    // borderRadius: 7,
     marginTop: 30,
+  },
+  buttonbox: {
+    textAlign: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    borderRadius: 7,
   },
 
   buttonboxback: {
@@ -144,6 +151,25 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
+  passwordVisible: {
+    position: "absolute",
+    right: 0,
+    top: "50%",
+    zIndex: 5,
+  },
 })
 
 export default styles
+
+// const animationValue = new Animated.ValueXY({
+//   x: 80,
+//   y: 50,
+// })
+// Animated.timing(animationValue, {
+//   toValue: {
+//     x: 280,
+//     y: 50,
+//   },
+//   duration: 500,
+//   useNativeDriver: false,
+// }).start()
