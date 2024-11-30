@@ -53,7 +53,7 @@ export const stylesMapPage = StyleSheet.create({
 export const stylesMapMarker = StyleSheet.create({
   containermarker: {
     borderRadius: 5,
-    backgroundColor: "#071a22ba",
+    backgroundColor: colors.deepdark,
     width: "100%",
     height: "100%",
     padding: 5,
@@ -67,7 +67,7 @@ export const stylesMapMarker = StyleSheet.create({
     textAlign: "center",
   },
   colorLink: {
-    color: "rgba(0, 98, 128, 0.9)",
+    color: colors.light,
     textAlign: "center",
   },
 })

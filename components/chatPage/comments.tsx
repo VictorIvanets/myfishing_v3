@@ -27,6 +27,7 @@ export const Components = (props: CommentComponentProps) => {
       {login ? (
         <>
           {allCommentData.map((i) => {
+            const min = new Date(i.createdAt).getMinutes()
             return (
               <View
                 key={i.comId}
@@ -54,7 +55,7 @@ export const Components = (props: CommentComponentProps) => {
                   </ThemedText>
                   <ThemedText style={styles.commentText}>
                     {new Date(i.createdAt).getHours()}.
-                    {new Date(i.createdAt).getMinutes()}
+                    {min >= 0 && min <= 9 ? `0${min}` : min}
                   </ThemedText>
                 </View>
               </View>

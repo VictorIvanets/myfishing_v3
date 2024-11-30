@@ -87,6 +87,10 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
             style={styles.buttonbox}
             onPress={() => {
               outChat(userId)
+              subdata.forEach((i) => {
+                i.userId === userId
+                outChat(userId)
+              })
             }}
             href={"/(tabs)"}
           >
@@ -116,6 +120,7 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
               setSelectUser={setSelectUser}
               subdata={subdata}
               outChat={outChat}
+              inChat={inChat}
             />
           )}
         </ScrollView>

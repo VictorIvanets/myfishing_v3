@@ -100,6 +100,8 @@ const stylesOneSet = StyleSheet.create({
   },
   widgetText: {
     color: colors.deepdark,
+    fontFamily: "RobotoRegular",
+    fontWeight: 400,
   },
   comment: {
     width: "95%",
