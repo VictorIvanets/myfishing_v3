@@ -122,7 +122,7 @@ export const stylesChat = StyleSheet.create({
   },
   commentText: {
     color: colors.deepdark,
-    fontFamily: "HelveticaNeue",
+    fontFamily: "SpaceMono",
     fontSize: 12,
   },
   btndel: {

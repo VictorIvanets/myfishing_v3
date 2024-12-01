@@ -88,8 +88,9 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
             onPress={() => {
               outChat(userId)
               subdata.forEach((i) => {
-                i.userId === userId
-                outChat(userId)
+                if (i.userId === userId) {
+                  outChat(i.userId)
+                }
               })
             }}
             href={"/(tabs)"}
