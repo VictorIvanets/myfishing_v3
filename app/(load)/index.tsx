@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText"
 import { useEffect, useState } from "react"
-import { View, Image, Alert, StatusBar, ScrollView } from "react-native"
+import { View, Image, Alert, StatusBar } from "react-native"
 import * as Location from "expo-location"
 import { LinearGradient } from "expo-linear-gradient"
 import AsyncStorage from "@react-native-async-storage/async-storage"

@@ -1,27 +1,18 @@
 import { ThemedText } from "@/components/ThemedText"
 import React, { useEffect, useState } from "react"
-import {
-  TextInput,
-  View,
-  Image,
-  Pressable,
-  StatusBar,
-  Animated,
-} from "react-native"
-import getlogin from "./authGet"
+import { TextInput, View, Image, Pressable, StatusBar } from "react-native"
 import styles from "./styles.loginpage"
 import Preloader from "@/components/preloader/preloader"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_JWT, LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
-import { Link, useNavigation } from "expo-router"
+import { Link } from "expo-router"
 import { LinearGradient } from "expo-linear-gradient"
 import { colors } from "@/constants/Colors"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import Ionicons from "@expo/vector-icons/Ionicons"
-import { transform } from "@babel/core"
-import useButtonAnime from "@/components/anime.button"
 import ButtonAnimeView from "@/components/anime.button"
 import AlertError from "@/components/alertError"
+import getlogin from "./api.auth"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")

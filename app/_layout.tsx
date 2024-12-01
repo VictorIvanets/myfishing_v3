@@ -10,14 +10,13 @@ import { StatusBar } from "expo-status-bar"
 import { useEffect } from "react"
 import "react-native-reanimated"
 import * as NavigationBar from "expo-navigation-bar"
-import { useColorScheme } from "@/hooks/useColorScheme"
 import { colors } from "@/constants/Colors"
 
 SplashScreen.preventAutoHideAsync()
 NavigationBar.setBackgroundColorAsync(colors.deepdark)
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme()
+  const colorScheme = "dark"
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     Raleway: require("../assets/fonts/Raleway-VariableFont_wght.ttf"),

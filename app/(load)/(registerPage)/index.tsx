@@ -10,12 +10,12 @@ import {
 import { LinearGradient } from "expo-linear-gradient"
 import { default as styles } from "./styles.registerpage"
 import { useEffect, useState } from "react"
-import setUser from "./register"
 import Preloader from "@/components/preloader/preloader"
 import { Link } from "expo-router"
 import { colors } from "@/constants/Colors"
 import ButtonAnimeView from "@/components/anime.button"
 import AlertError from "@/components/alertError"
+import setUser from "./api.register"
 
 export default function RegisterPage() {
   const [loginInput, setLoginInput] = useState("")

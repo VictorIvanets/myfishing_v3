@@ -1,11 +1,13 @@
 import { ApolloProvider } from "@apollo/client"
 import { client } from "@/GQL/client/client"
-import ChatPage from "@/components/chatPage/chat.component"
+import ChatPage from "@/entities/chatPage/chat.component"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
 import { useEffect, useState } from "react"
 import Preloader from "@/components/preloader/preloader"
-import getOneSetsByUser, { MapResponse } from "@/components/allset/getSetByUser"
+import getOneSetsByUser, {
+  MapResponse,
+} from "@/entities/allset/api/api.getSetByUser"
 
 export default function ChatProvider() {
   const [userLogin, setUserLogin] = useState<string>()

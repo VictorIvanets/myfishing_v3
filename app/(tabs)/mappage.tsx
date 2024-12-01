@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient"
-import { stylesMapPage as styles } from "../../components/mapPage/styles.mappage"
+import { stylesMapPage as styles } from "../../entities/mapPage/styles.mappage"
 import React, { useEffect, useRef, useState } from "react"
 import MapView, {
   Callout,
@@ -20,16 +20,19 @@ import {
 } from "react-native"
 import { useNavigation } from "expo-router"
 import { ThemedText } from "@/components/ThemedText"
-import { getAllSets, MapResponse } from "../../components/mapPage/getAllsets"
-import MapMarker from "../../components/oneSetPage/oneSetPage"
-import NewSetMapMarker from "../../components/mapPage/newSetMarker"
+import {
+  getAllSets,
+  MapResponse,
+} from "../../entities/mapPage/api/api.getAllsets"
+import MapMarker from "../../entities/oneSetPage/oneSetPage"
+import NewSetMapMarker from "../../entities/mapPage/newSetMarker"
 import {
   LOCAL_INIT_LAT,
   LOCAL_INIT_LON,
   LOCAL_LOGIN,
 } from "@/constants/constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import OneSetPage from "../../components/oneSetPage/oneSetPage"
+import OneSetPage from "../../entities/oneSetPage/oneSetPage"
 import { colors } from "@/constants/Colors"
 
 interface MarkerProps {

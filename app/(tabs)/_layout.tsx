@@ -2,16 +2,12 @@ import { Tabs } from "expo-router"
 import React from "react"
 import { StatusBar } from "react-native"
 
-import TabBarBackground from "@/components/ui/TabBarBackground"
-import { useColorScheme } from "@/hooks/useColorScheme"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { colors } from "@/constants/Colors"
-import { HapticTab } from "@/components/ui/HapticTab"
 import Entypo from "@expo/vector-icons/Entypo"
+import { HapticTab } from "@/components/HapticTab"
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme()
-
   return (
     <Tabs
       screenOptions={{
@@ -20,7 +16,6 @@ export default function TabLayout() {
         tabBarInactiveTintColor: colors.dark,
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
         tabBarStyle: {
           backgroundColor: colors.deepdark,
           borderColor: colors.deepdark,

@@ -1,7 +1,7 @@
 import { View, StatusBar } from "react-native"
 
 import { ThemedText } from "@/components/ThemedText"
-import { stylesStartPage as styles } from "@/components/SartPage/styles.startpage"
+import { stylesStartPage as styles } from "@/entities/SartPage/styles.startpage"
 import { exitLogin } from "@/hooks/exitApp"
 import { Link } from "expo-router"
 import Ionicons from "@expo/vector-icons/Ionicons"
