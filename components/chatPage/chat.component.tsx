@@ -120,7 +120,6 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
               setSelectUser={setSelectUser}
               subdata={subdata}
               outChat={outChat}
-              inChat={inChat}
             />
           )}
         </ScrollView>

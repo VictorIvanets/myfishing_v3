@@ -1,4 +1,3 @@
-import { memo, useEffect } from "react"
 import { UserData } from "./glq_hooks/chat.types"
 import { View, ScrollView } from "react-native"
 import { ThemedText } from "../ThemedText"
@@ -9,24 +8,11 @@ interface userComponentProps {
   userId: string
   subdata: UserData[]
   outChat: (userId: string) => void
-  inChat: (login: string, userId: string) => void
   setSelectUser: (user: string) => void
 }
 
 export const UserComponent = (props: userComponentProps) => {
-  const { login, subdata, outChat, setSelectUser, userId, inChat } = props
-
-  useEffect(() => {
-    const check = subdata.filter((i) => i.userId == userId)
-
-    if (check.length > 1) {
-      subdata.forEach((i) => {
-        i.userId === userId
-        outChat(userId)
-      })
-      inChat(login, userId)
-    }
-  }, [])
+  const { login, subdata, outChat, setSelectUser } = props
 
   return (
     <View style={styles.userin}>
