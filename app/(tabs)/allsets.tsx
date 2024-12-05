@@ -1,4 +1,4 @@
-import { View, StatusBar, ScrollView, Pressable } from "react-native"
+import { View, StatusBar, ScrollView, RefreshControl } from "react-native"
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_LOGIN } from "@/constants/constants"
@@ -8,16 +8,14 @@ import { MapResponse } from "@/entities/allset/api/api.getAllset"
 import ItemSet from "@/entities/allset/itemSet"
 import getOneSetsByUser from "@/entities/allset/api/api.getSetByUser"
 import Preloader from "@/components/preloader/preloader"
-import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import OneSetPage from "@/entities/oneSetPage/oneSetPage"
-import { colors } from "@/constants/Colors"
 
 export default function AllSetPage() {
   const [userLogin, setUserLogin] = useState<string | undefined>()
   const [allset, setAllset] = useState<MapResponse[]>([])
   const [setIdforOneItem, setSetIdforOneItem] = useState<number | null>(null)
   const [hendDelSet, sethendDelSet] = useState<boolean>(false)
-  const [activeReload, setActiveReload] = useState<boolean>(false)
+  const [isloading, setisloading] = useState<boolean>(false)
 
   async function localGetUserLogin() {
     try {
@@ -31,9 +29,11 @@ export default function AllSetPage() {
   }
 
   async function GetAllSets(userLogin: string) {
+    setisloading(true)
     const data = await getOneSetsByUser(userLogin)
     if (typeof data !== "string") {
-      setAllset(data)
+      setAllset(data.reverse())
+      setisloading(false)
     }
   }
 
@@ -49,9 +49,15 @@ export default function AllSetPage() {
     <View style={styles.container}>
       {allset ? (
         <>
-          {!setIdforOneItem ? (
+          {!setIdforOneItem && userLogin ? (
             <>
               <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    onRefresh={() => GetAllSets(userLogin)}
+                    refreshing={isloading}
+                  />
+                }
                 style={{
                   width: "100%",
                   marginTop: 50,
@@ -69,32 +75,17 @@ export default function AllSetPage() {
                   />
                 ))}
               </ScrollView>
-              <Pressable
-                onPress={() => {
-                  setAllset([])
-                  userLogin && GetAllSets(userLogin)
-                }}
-                onTouchStart={() => setActiveReload(true)}
-                onTouchEnd={() => setActiveReload(false)}
-                style={{
-                  ...styles.buttonReload,
-                  backgroundColor: activeReload ? colors.deepdark : colors.dark,
-                }}
-              >
-                <MaterialIcons
-                  style={styles.buttondelIcon}
-                  name="autorenew"
-                  size={30}
-                  color={colors.light}
-                />
-              </Pressable>
             </>
           ) : (
-            <OneSetPage
-              setId={setIdforOneItem}
-              setSetIdforOneItem={setSetIdforOneItem}
-              login={userLogin}
-            />
+            <>
+              {setIdforOneItem && (
+                <OneSetPage
+                  setId={setIdforOneItem}
+                  setSetIdforOneItem={setSetIdforOneItem}
+                  login={userLogin}
+                />
+              )}
+            </>
           )}
         </>
       ) : (

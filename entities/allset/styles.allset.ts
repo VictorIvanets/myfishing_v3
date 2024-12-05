@@ -22,8 +22,6 @@ const stylesAllset = StyleSheet.create({
     justifyContent: "center",
     width: 36,
     height: 36,
-    borderRadius: 7,
-    backgroundColor: colors.dark,
   },
   buttondelIcon: {
     textAlign: "center",
@@ -43,15 +41,6 @@ const stylesAllset = StyleSheet.create({
     justifyContent: "center",
     width: "80%",
     height: 36,
-    borderRadius: borderRadiusMyf,
-    backgroundColor: colors.dark,
-    // shadowColor: colors.black,
-    // // shadowOpacity: 0.8,
-    // shadowRadius: 2,
-    // shadowOffset: {
-    //   height: 1,
-    //   width: 1,
-    // },
   },
   buttonactyve: {
     textAlign: "center",
@@ -78,8 +67,9 @@ const stylesAllset = StyleSheet.create({
     height: 40,
     alignContent: "center",
     justifyContent: "space-between",
-    borderTopWidth: 1,
-    borderTopColor: colors.light,
+    borderTopWidth: 2,
+    borderTopColor: colors.deepgray,
+    borderRadius: 15,
   },
   itemText: {
     textAlign: "left",

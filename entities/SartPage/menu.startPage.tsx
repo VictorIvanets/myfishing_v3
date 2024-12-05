@@ -13,7 +13,7 @@ import {
   userAtom,
 } from "@/store/store.state"
 import Entypo from "@expo/vector-icons/Entypo"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function MenuStartPage() {
   const [atomUserState] = useAtom(userAtom)

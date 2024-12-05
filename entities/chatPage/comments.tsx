@@ -1,6 +1,5 @@
-import { memo, useEffect } from "react"
-import { CommentData, UserData } from "./glq_hooks/chat.types"
-import { View, ScrollView, Pressable } from "react-native"
+import { CommentData } from "./glq_hooks/chat.types"
+import { View, Pressable } from "react-native"
 import { ThemedText } from "../../components/ThemedText"
 import { stylesChat as styles } from "@/entities/chatPage/styles.chatpage"
 import { colors } from "@/constants/Colors"

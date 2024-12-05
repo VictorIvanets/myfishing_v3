@@ -40,7 +40,7 @@ export const useSubscribeForCheck = (): UseSubCheck => {
   const { data, loading } = useSubscription(gqlfile.UserChek)
 
   return {
-    loading,
+    loadingUser: loading,
     subdata: data && data.userChek,
   }
 }

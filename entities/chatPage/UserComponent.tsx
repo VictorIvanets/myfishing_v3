@@ -8,12 +8,10 @@ interface userComponentProps {
   login: string
   userId: string
   subdata: UserData[]
-  outChat: (userId: string) => void
-  setSelectUser: (user: string) => void
 }
 
 export const UserComponent = (props: userComponentProps) => {
-  const { login, subdata, outChat, setSelectUser } = props
+  const { login, subdata } = props
 
   let decrement = 1
 
@@ -25,7 +23,11 @@ export const UserComponent = (props: userComponentProps) => {
           <View
             key={i.userId + add}
             style={
-              login === i.user ? styles.userinitemactive : styles.userinitem
+              login === i.user
+                ? styles.userinitemactive
+                : i.user === "load..."
+                ? styles.userinitemactiveLoad
+                : styles.userinitem
             }
           >
             <ThemedText type="default">{i.user}</ThemedText>

@@ -1,5 +1,4 @@
 import { View, StatusBar, GestureResponderEvent, Image } from "react-native"
-
 import { ThemedText } from "@/components/ThemedText"
 import { stylesStartPage as styles } from "@/entities/SartPage/styles.startpage"
 import { useAtom } from "jotai"

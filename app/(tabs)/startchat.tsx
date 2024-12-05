@@ -2,7 +2,6 @@ import { View, StatusBar } from "react-native"
 import { ThemedText } from "@/components/ThemedText"
 import { default as styles } from "@/entities/chatPage/styles.chatpage"
 import { Link } from "expo-router"
-import Ionicons from "@expo/vector-icons/Ionicons"
 import { colors } from "@/constants/Colors"
 import Entypo from "@expo/vector-icons/Entypo"
 

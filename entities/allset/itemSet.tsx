@@ -1,24 +1,12 @@
-import {
-  Image,
-  StyleSheet,
-  Platform,
-  View,
-  Button,
-  StatusBar,
-  ScrollView,
-  Pressable,
-} from "react-native"
+import { View, Pressable } from "react-native"
 
 import { ThemedText } from "@/components/ThemedText"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { LOCAL_USERID } from "@/constants/constants"
-import { useNavigation } from "expo-router"
 import { default as styles } from "@/entities/allset/styles.allset"
-import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
+import { MapResponse } from "@/entities/allset/api/api.getAllset"
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import { delItem } from "@/hooks/delItem"
-import { SetStateAction } from "react"
 import { colors } from "@/constants/Colors"
+import { LinearGradient } from "expo-linear-gradient"
 
 interface PropsSet {
   data: MapResponse
@@ -36,7 +24,16 @@ export default function ItemSet({
   const { title, description, date, score, coords, setID } = data
 
   return (
-    <View style={styles.itemset}>
+    <LinearGradient
+      colors={[
+        colors.deepgray,
+        colors.dark,
+        colors.dark,
+        colors.dark,
+        colors.black,
+      ]}
+      style={styles.itemset}
+    >
       <Pressable onPress={() => setSetIdforOneItem(setID)}>
         <ThemedText type="subtitle" style={styles.itemText}>
           Місце: {title}
@@ -52,14 +49,6 @@ export default function ItemSet({
         </ThemedText>
       </Pressable>
       <View style={styles.buttonbox}>
-        {/* <Pressable style={styles.buttondel}>
-          <MaterialIcons
-            style={styles.buttondelIcon}
-            name="location-on"
-            size={30}
-            color={"#00acac"}
-          />
-        </Pressable> */}
         <Pressable
           onPress={() => setSetIdforOneItem(setID)}
           style={styles.buttoncoords}
@@ -82,6 +71,6 @@ export default function ItemSet({
           />
         </Pressable>
       </View>
-    </View>
+    </LinearGradient>
   )
 }
