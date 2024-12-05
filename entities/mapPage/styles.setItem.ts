@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const stylesSetItem = StyleSheet.create({
@@ -78,19 +78,19 @@ const stylesSetItem = StyleSheet.create({
     width: "100%",
     height: 200,
     marginBottom: 20,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
   },
   inputBlock: {
     width: "100%",
     height: 40,
     marginBottom: 20,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
   },
   inputNumeric: {
     width: 90,
     height: 40,
     marginBottom: 20,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     // alignSelf: "flex-start",
   },
   inputBottoLine: {
@@ -103,7 +103,7 @@ const stylesSetItem = StyleSheet.create({
     justifyContent: "center",
     width: 300,
     height: 50,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.dark,
     marginBottom: 10,
   },
@@ -113,7 +113,7 @@ const stylesSetItem = StyleSheet.create({
     justifyContent: "center",
     width: 150,
     height: 40,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     backgroundColor: "none",
   },
   maifon: {

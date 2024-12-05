@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/ThemedText"
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { ReactNode } from "react"
 import { Animated, Pressable } from "react-native"
 import { StyleSheet } from "react-native"
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: "100%",
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
   },
   buttonPress: {
     textAlign: "center",

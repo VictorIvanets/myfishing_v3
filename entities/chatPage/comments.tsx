@@ -22,7 +22,7 @@ export const Components = (props: CommentComponentProps) => {
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
-      colors={[colors.deepdark, colors.light, colors.deepdark]}
+      colors={[colors.deepdark, colors.dark, colors.deepdark]}
     >
       {login ? (
         <>

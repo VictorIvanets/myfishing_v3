@@ -1,6 +1,7 @@
 import { PREFIX } from "@/constants/constants"
 //@ts-ignore next line
-import axios from "react-native-axios"
+// import axios from "react-native-axios"
+import axios, { AxiosError } from "axios"
 
 export interface LoginResponse {
   access_token: string
@@ -18,11 +19,9 @@ const getlogin = async (login: string, password: string) => {
     return data.data
   } catch (e) {
     console.log(e)
-    // if (e instanceof AxiosError) {
-    //   return e.response?.data
-    // } else
-
-    return e
+    if (e instanceof AxiosError) {
+      return e.response?.data
+    } else return e
   }
 }
 

@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const stylesregister = StyleSheet.create({
@@ -70,7 +70,7 @@ const stylesregister = StyleSheet.create({
     width: "80%",
     height: 40,
     marginBottom: 20,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
   },
   inputBottoLine: {
     backgroundColor: "rgba(0, 98, 128, 0.9)",
@@ -82,7 +82,7 @@ const stylesregister = StyleSheet.create({
     justifyContent: "center",
     width: "80%",
     height: 50,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     backgroundColor: "#071a22ba",
     marginBottom: 10,
   },
@@ -92,7 +92,7 @@ const stylesregister = StyleSheet.create({
     justifyContent: "center",
     width: 150,
     height: 40,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     backgroundColor: "none",
   },
   maifon: {

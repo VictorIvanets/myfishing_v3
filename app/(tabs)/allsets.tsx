@@ -1,36 +1,23 @@
-import {
-  Image,
-  StyleSheet,
-  Platform,
-  View,
-  Button,
-  StatusBar,
-  ScrollView,
-  Pressable,
-} from "react-native"
+import { View, StatusBar, ScrollView, Pressable } from "react-native"
 
-import { ThemedText } from "@/components/ThemedText"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
-import { useNavigation } from "expo-router"
+import { LOCAL_LOGIN } from "@/constants/constants"
 import { default as styles } from "@/entities/allset/styles.allset"
-import { SetStateAction, useEffect, useState } from "react"
-import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
+import { useEffect, useState } from "react"
+import { MapResponse } from "@/entities/allset/api/api.getAllset"
 import ItemSet from "@/entities/allset/itemSet"
 import getOneSetsByUser from "@/entities/allset/api/api.getSetByUser"
 import Preloader from "@/components/preloader/preloader"
-import SetMoreInfo from "@/entities/allset/setMoreInfo"
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import OneSetPage from "@/entities/oneSetPage/oneSetPage"
+import { colors } from "@/constants/Colors"
 
 export default function AllSetPage() {
-  const [userLogin, setUserLogin] = useState<string>()
+  const [userLogin, setUserLogin] = useState<string | undefined>()
   const [allset, setAllset] = useState<MapResponse[]>([])
   const [setIdforOneItem, setSetIdforOneItem] = useState<number | null>(null)
-  const [setLoginforOneItem, setSetLoginforOneItem] = useState<number | null>(
-    null
-  )
   const [hendDelSet, sethendDelSet] = useState<boolean>(false)
+  const [activeReload, setActiveReload] = useState<boolean>(false)
 
   async function localGetUserLogin() {
     try {
@@ -64,7 +51,14 @@ export default function AllSetPage() {
         <>
           {!setIdforOneItem ? (
             <>
-              <ScrollView style={{ width: "100%", marginTop: 50, padding: 5 }}>
+              <ScrollView
+                style={{
+                  width: "100%",
+                  marginTop: 50,
+                  padding: 5,
+                  paddingHorizontal: 10,
+                }}
+              >
                 {allset.map((i) => (
                   <ItemSet
                     key={i.setID}
@@ -80,13 +74,18 @@ export default function AllSetPage() {
                   setAllset([])
                   userLogin && GetAllSets(userLogin)
                 }}
-                style={styles.buttonReload}
+                onTouchStart={() => setActiveReload(true)}
+                onTouchEnd={() => setActiveReload(false)}
+                style={{
+                  ...styles.buttonReload,
+                  backgroundColor: activeReload ? colors.deepdark : colors.dark,
+                }}
               >
                 <MaterialIcons
                   style={styles.buttondelIcon}
                   name="autorenew"
                   size={30}
-                  color={"#00acac"}
+                  color={colors.light}
                 />
               </Pressable>
             </>

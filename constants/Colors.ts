@@ -1,16 +1,29 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { LOCAL_LOGIN, LOCAL_THEME } from "./constants"
 
+// export const colors = {
+//   light: "#00b4ba",
+//   lightText: "#cecece",
+//   dark: "#014e63",
+//   deepdark: "#03171c",
+//   // deepdark: "#1d1e1f",
+//   deepgray: "#4f4f4f",
+//   gray: "#b8b8b8",
+//   black: "black",
+// }
+
 export const colors = {
-  light: "#00b4ba",
+  light: "#00c1e3",
   lightText: "#cecece",
-  dark: "#014e63",
-  deepdark: "#03171c",
+  dark: "#363636",
+  deepdark: "#1c1c1c",
   // deepdark: "#1d1e1f",
   deepgray: "#4f4f4f",
   gray: "#b8b8b8",
   black: "black",
 }
+
+export const borderRadiusMyf = 25
 
 const tintColorLight = "#0a7ea4"
 const tintColorDark = "#fff"

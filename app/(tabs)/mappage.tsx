@@ -1,30 +1,18 @@
 import { LinearGradient } from "expo-linear-gradient"
 import { stylesMapPage as styles } from "../../entities/mapPage/styles.mappage"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import MapView, {
-  Callout,
-  CalloutPressEvent,
   Marker,
   MarkerPressEvent,
   PROVIDER_GOOGLE,
   Region,
 } from "react-native-maps"
-import {
-  Alert,
-  Pressable,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native"
-import { useNavigation } from "expo-router"
+import { Pressable, StatusBar, StyleSheet, View } from "react-native"
 import { ThemedText } from "@/components/ThemedText"
 import {
   getAllSets,
   MapResponse,
 } from "../../entities/mapPage/api/api.getAllsets"
-import MapMarker from "../../entities/oneSetPage/oneSetPage"
 import NewSetMapMarker from "../../entities/mapPage/newSetMarker"
 import {
   LOCAL_INIT_LAT,

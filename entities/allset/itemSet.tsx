@@ -18,6 +18,7 @@ import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import { delItem } from "@/hooks/delItem"
 import { SetStateAction } from "react"
+import { colors } from "@/constants/Colors"
 
 interface PropsSet {
   data: MapResponse
@@ -36,32 +37,34 @@ export default function ItemSet({
 
   return (
     <View style={styles.itemset}>
-      <ThemedText type="subtitle" style={styles.itemText}>
-        Місце: {title}
-      </ThemedText>
-      <ThemedText type="default" style={styles.itemText}>
-        Дата: {date}
-      </ThemedText>
-      <ThemedText type="default" style={styles.itemText}>
-        Що ловилося: {description}
-      </ThemedText>
-      <ThemedText type="default" style={styles.itemText}>
-        Оцінка: {score}
-      </ThemedText>
+      <Pressable onPress={() => setSetIdforOneItem(setID)}>
+        <ThemedText type="subtitle" style={styles.itemText}>
+          Місце: {title}
+        </ThemedText>
+        <ThemedText type="default" style={styles.itemText}>
+          Дата: {date}
+        </ThemedText>
+        <ThemedText type="default" style={styles.itemText}>
+          Що ловилося: {description}
+        </ThemedText>
+        <ThemedText type="default" style={styles.itemText}>
+          Оцінка: {score}
+        </ThemedText>
+      </Pressable>
       <View style={styles.buttonbox}>
-        <Pressable style={styles.buttondel}>
+        {/* <Pressable style={styles.buttondel}>
           <MaterialIcons
             style={styles.buttondelIcon}
             name="location-on"
             size={30}
             color={"#00acac"}
           />
-        </Pressable>
+        </Pressable> */}
         <Pressable
           onPress={() => setSetIdforOneItem(setID)}
           style={styles.buttoncoords}
         >
-          <ThemedText type="default" style={styles.colorWhite}>
+          <ThemedText type="default" style={styles.colorLight}>
             ПЕРЕГЛЯНУТИ
           </ThemedText>
         </Pressable>
@@ -75,7 +78,7 @@ export default function ItemSet({
             style={styles.buttondelIcon}
             name="delete"
             size={30}
-            color={"#00acac"}
+            color={colors.light}
           />
         </Pressable>
       </View>

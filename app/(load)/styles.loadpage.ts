@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 120,
     height: 130,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     // backgroundColor: colors.dark,
     marginBottom: 10,
   },

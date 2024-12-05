@@ -11,6 +11,11 @@ import Weather from "./weather"
 import { MapResponse } from "../allset/api/api.getAllset"
 import CommentScrollView from "./comments/commetsSetPage"
 import UploadPhoto from "../upload/upload.component"
+import { CommentItem } from "./comments/type.comment"
+import { getComments } from "./api/api.comment"
+import Preloader from "@/components/preloader/preloader"
+import { useAtom } from "jotai"
+import { userAtom } from "@/store/store.state"
 
 type OneSetPage = {
   login: string | undefined
@@ -21,10 +26,22 @@ type OneSetPage = {
 
 export default function OneSetPage(props: OneSetPage) {
   const { setId, setViewOneSetById, setSetIdforOneItem, login } = props
+  const [atomUserState] = useAtom(userAtom)
   const [oneSet, setOneSet] = useState<MapResponse | null>(null)
   const [photoSelect, setPhotoSelect] = useState<boolean>(true)
   const [photoUploadSelect, setPhotoUploadSelect] = useState<boolean>(false)
   const [commentSelect, setCommentSelect] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [dataLoadComment, setDataLoadComment] = useState<
+    CommentItem[] | string
+  >()
+
+  useEffect(() => {
+    if (setId) {
+      const comments = getComments(setId)
+      comments.then((comments) => setDataLoadComment(comments))
+    }
+  }, [isLoading, setId])
 
   async function GetSet(setId: number) {
     const data = await getOneSetsBySetId(setId)
@@ -59,7 +76,9 @@ export default function OneSetPage(props: OneSetPage) {
                   href={`https://www.google.com/maps?ll=${oneSet.coords[0]},${oneSet.coords[1]}&q=${oneSet.coords[0]},${oneSet.coords[1]}`}
                 >
                   <View style={styles.coordslinkbox}>
-                    <ThemedText type="default">Google map</ThemedText>
+                    <ThemedText style={styles.widgetboxtext} type="default">
+                      Google map
+                    </ThemedText>
                     <MaterialIcons
                       name="location-pin"
                       size={40}
@@ -85,7 +104,13 @@ export default function OneSetPage(props: OneSetPage) {
             <FotoScrollView img={oneSet.img} setId={oneSet.setID} />
           )}
           {login && commentSelect && (
-            <CommentScrollView login={login} setId={setId} />
+            <CommentScrollView
+              login={login}
+              setId={setId}
+              dataLoad={dataLoadComment}
+              setIsLoading={setIsLoading}
+              isLoading={isLoading}
+            />
           )}
           {login && photoUploadSelect && <UploadPhoto setID={setId} />}
 
@@ -108,26 +133,37 @@ export default function OneSetPage(props: OneSetPage) {
                 />
               </Pressable>
             </View>
+            {oneSet.login === atomUserState.login && (
+              <View style={styles.bootombox}>
+                <Pressable
+                  style={styles.buttonbox}
+                  onPress={() => {
+                    {
+                      setPhotoSelect(false)
+                      setPhotoUploadSelect(true)
+                      setCommentSelect(false)
+                    }
+                  }}
+                >
+                  <MaterialIcons
+                    style={{ textAlign: "center", justifyContent: "center" }}
+                    name="add-photo-alternate"
+                    size={40}
+                    color={colors.light}
+                  />
+                </Pressable>
+              </View>
+            )}
             <View style={styles.bootombox}>
-              <Pressable
-                style={styles.buttonbox}
-                onPress={() => {
-                  {
-                    setPhotoSelect(false)
-                    setPhotoUploadSelect(true)
-                    setCommentSelect(false)
-                  }
-                }}
-              >
-                <MaterialIcons
-                  style={{ textAlign: "center", justifyContent: "center" }}
-                  name="add-photo-alternate"
-                  size={40}
-                  color={colors.light}
-                />
-              </Pressable>
-            </View>
-            <View style={styles.bootombox}>
+              {dataLoadComment?.length ? (
+                <View style={styles.commLenght}>
+                  <ThemedText style={styles.commLenghttext} type="subtitlelite">
+                    {dataLoadComment.length}
+                  </ThemedText>
+                </View>
+              ) : (
+                <></>
+              )}
               <Pressable
                 style={styles.buttonbox}
                 onPress={() => {
@@ -164,9 +200,7 @@ export default function OneSetPage(props: OneSetPage) {
           <View style={styles.inputBottoLine}></View>
         </>
       ) : (
-        <ThemedText type="subtitle" style={styles.colorWhite}>
-          ERROR DATA FETCH
-        </ThemedText>
+        <Preloader />
       )}
     </View>
   )

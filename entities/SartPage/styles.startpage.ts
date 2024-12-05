@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native"
 
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 
 export const stylesStartPage = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     paddingTop: 35,
     width: "100%",
     height: "100%",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.deepdark,
   },
@@ -29,14 +29,20 @@ export const stylesStartPage = StyleSheet.create({
     color: colors.light,
     marginTop: 10,
   },
-
+  contentTextTitle: {
+    textAlign: "left",
+    marginBottom: 7,
+    color: colors.light,
+  },
   buttonbox: {
     flexDirection: "row",
     textAlign: "center",
+    alignContent: "center",
+    justifyContent: "center",
     width: 300,
     height: 50,
-
-    borderRadius: 7,
+    gap: 5,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.dark,
     marginBottom: 5,
   },
@@ -54,7 +60,7 @@ export const stylesStartPage = StyleSheet.create({
     width: 300,
     height: 50,
     gap: 10,
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.dark,
     marginBottom: 5,
   },
@@ -65,5 +71,13 @@ export const stylesStartPage = StyleSheet.create({
   icon: {
     justifyContent: "center",
     textAlign: "center",
+  },
+  appLogoBox: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  appLogo: {
+    height: 80,
   },
 })

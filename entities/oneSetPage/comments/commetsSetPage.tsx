@@ -10,19 +10,18 @@ import { getComments } from "../api/api.comment"
 interface ScrollProps {
   login: string
   setId: number
+  dataLoad: string | CommentItem[] | undefined
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  isLoading: boolean
 }
 
-export default function CommentScrollView({ login, setId }: ScrollProps) {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [dataLoad, setDataLoad] = useState<CommentItem[] | string>()
-
-  useEffect(() => {
-    if (setId) {
-      const comments = getComments(setId)
-      comments.then((comments) => setDataLoad(comments))
-    }
-  }, [isLoading, setId])
-
+export default function CommentScrollView({
+  login,
+  setId,
+  dataLoad,
+  setIsLoading,
+  isLoading,
+}: ScrollProps) {
   return (
     <>
       {dataLoad ? (

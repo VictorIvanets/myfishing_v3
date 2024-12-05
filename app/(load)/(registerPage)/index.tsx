@@ -115,7 +115,7 @@ export default function RegisterPage() {
 
   return (
     <LinearGradient
-      colors={[colors.light, "transparent", colors.deepdark]}
+      colors={[colors.black, colors.deepdark]}
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"} />

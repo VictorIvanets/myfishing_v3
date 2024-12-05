@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const stylesOneSet = StyleSheet.create({
@@ -35,6 +35,26 @@ const stylesOneSet = StyleSheet.create({
     alignItems: "center",
   },
 
+  commLenght: {
+    position: "absolute",
+    width: 20,
+    height: 20,
+    // justifyContent: "center",
+    alignItems: "center",
+    top: -5,
+    right: 0,
+    borderRadius: 15,
+    backgroundColor: colors.light,
+    zIndex: 3,
+    padding: 0,
+    borderWidth: 1,
+  },
+  commLenghttext: {
+    fontSize: 13,
+    color: colors.deepdark,
+    fontFamily: "RobotoBold",
+  },
+
   foto: {
     width: "100%",
     backgroundColor: colors.light,
@@ -58,7 +78,7 @@ const stylesOneSet = StyleSheet.create({
     height: 60,
     gap: 5,
     backgroundColor: colors.light,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   buttonSelectBox: {
     width: "100%",
@@ -73,7 +93,7 @@ const stylesOneSet = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     height: 40,
-    borderRadius: 7,
+    borderRadius: 10,
     backgroundColor: colors.dark,
   },
   inputBottoLine: {
@@ -87,7 +107,7 @@ const stylesOneSet = StyleSheet.create({
     height: 60,
     padding: 5,
     backgroundColor: colors.light,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "flex-start",
     justifyContent: "center",
     marginBottom: 7,
@@ -97,6 +117,9 @@ const stylesOneSet = StyleSheet.create({
     gap: 10,
     justifyContent: "space-between",
     alignContent: "center",
+  },
+  widgetboxtext: {
+    color: colors.dark,
   },
   widgetText: {
     color: colors.deepdark,
@@ -110,7 +133,7 @@ const stylesOneSet = StyleSheet.create({
     backgroundColor: colors.gray,
     padding: 5,
     marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   commentText: {
     color: colors.deepdark,
@@ -142,13 +165,13 @@ const stylesOneSet = StyleSheet.create({
   inputBlockText: {
     width: "80%",
     height: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: colors.gray,
   },
   sendBlockText: {
     width: "15%",
     height: "100%",
-    borderRadius: 5,
+    borderRadius: borderRadiusMyf,
     justifyContent: "center",
   },
   inputText: {
