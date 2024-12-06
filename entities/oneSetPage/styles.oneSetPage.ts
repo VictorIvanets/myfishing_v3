@@ -2,18 +2,17 @@ import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const stylesOneSet = StyleSheet.create({
-  containermarker: {
+  containeset: {
     backgroundColor: colors.deepdark,
     width: "100%",
     height: "100%",
-    paddingTop: 25,
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   ScrollViewbox: {
     width: "100%",
-    height: "27%",
+    height: "28%",
   },
 
   contentbox: {
@@ -23,7 +22,7 @@ const stylesOneSet = StyleSheet.create({
   },
   photobox: {
     width: "100%",
-    height: "60%",
+    height: "57%",
   },
   photoboxContentContainer: {
     justifyContent: "center",
@@ -68,18 +67,6 @@ const stylesOneSet = StyleSheet.create({
     color: "rgba(0, 98, 128, 0.9)",
     textAlign: "center",
   },
-  coordslinkbox: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-    width: 150,
-    height: 60,
-    gap: 5,
-    backgroundColor: colors.light,
-    borderRadius: 10,
-  },
   buttonSelectBox: {
     width: "100%",
     height: 40,
@@ -102,10 +89,27 @@ const stylesOneSet = StyleSheet.create({
     height: 1,
     marginVertical: 3,
   },
+  linkGoogle: {
+    width: "47%",
+    height: 65,
+  },
+  coordslinkbox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    textAlign: "center",
+    width: "100%",
+    height: "100%",
+    gap: 5,
+    backgroundColor: colors.light,
+    borderRadius: 10,
+  },
   weatherbox: {
-    width: 160,
-    height: 60,
-    padding: 5,
+    width: "47%",
+    height: 65,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
     backgroundColor: colors.light,
     borderRadius: 10,
     alignItems: "flex-start",
@@ -113,10 +117,11 @@ const stylesOneSet = StyleSheet.create({
     marginBottom: 7,
   },
   widgetbox: {
+    width: "100%",
     flexDirection: "row",
     gap: 10,
     justifyContent: "space-between",
-    alignContent: "center",
+    alignContent: "space-between",
   },
   widgetboxtext: {
     color: colors.dark,

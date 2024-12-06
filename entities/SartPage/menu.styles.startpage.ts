@@ -10,11 +10,10 @@ const stylesMenuStartPage = StyleSheet.create({
     left: 0,
     width: "100%",
     height: "100%",
-    // backgroundColor: colors.gray,
     zIndex: 2,
+    // paddingTop: 35,
   },
   container: {
-    // flex: 1,
     padding: 20,
     width: 300,
     height: "100%",
@@ -25,7 +24,7 @@ const stylesMenuStartPage = StyleSheet.create({
     position: "absolute",
     zIndex: 5,
     alignSelf: "flex-start",
-    marginTop: 30,
+    // marginTop: 40,
 
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 2 },
@@ -74,7 +73,7 @@ const stylesMenuStartPage = StyleSheet.create({
   },
   btns: {
     width: "100%",
-    height: 350,
+    height: 300,
     padding: 0,
     gap: 10,
     alignItems: "center",
@@ -86,7 +85,6 @@ const stylesMenuStartPage = StyleSheet.create({
     height: 50,
     gap: 5,
 
-    // backgroundColor: colors.dark,
     marginBottom: 5,
   },
   btnitem: {

@@ -3,10 +3,12 @@ import { borderRadiusMyf, colors } from "@/constants/Colors"
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
+    height: "57%",
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
+    padding: 10,
   },
   Linkbox: {
     alignItems: "center",
@@ -35,14 +37,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 70,
     flexDirection: "row",
-    paddingHorizontal: 15,
     alignContent: "space-around",
     justifyContent: "space-around",
     gap: 10,
     marginBottom: 10,
   },
   button: {
-    width: 140,
+    width: "47%",
     height: 70,
     padding: 10,
     borderRadius: borderRadiusMyf,
@@ -73,8 +74,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: 190,
-    height: 300,
+    width: 200,
+    height: 260,
     borderRadius: 8,
   },
   errorText: {

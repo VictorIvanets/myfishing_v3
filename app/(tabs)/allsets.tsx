@@ -9,6 +9,10 @@ import ItemSet from "@/entities/allset/itemSet"
 import getOneSetsByUser from "@/entities/allset/api/api.getSetByUser"
 import Preloader from "@/components/preloader/preloader"
 import OneSetPage from "@/entities/oneSetPage/oneSetPage"
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context"
 
 export default function AllSetPage() {
   const [userLogin, setUserLogin] = useState<string | undefined>()
@@ -16,6 +20,7 @@ export default function AllSetPage() {
   const [setIdforOneItem, setSetIdforOneItem] = useState<number | null>(null)
   const [hendDelSet, sethendDelSet] = useState<boolean>(false)
   const [isloading, setisloading] = useState<boolean>(false)
+  const insets = useSafeAreaInsets()
 
   async function localGetUserLogin() {
     try {
@@ -46,52 +51,58 @@ export default function AllSetPage() {
   }, [userLogin, hendDelSet])
 
   return (
-    <View style={styles.container}>
-      {allset ? (
-        <>
-          {!setIdforOneItem && userLogin ? (
-            <>
-              <ScrollView
-                refreshControl={
-                  <RefreshControl
-                    onRefresh={() => GetAllSets(userLogin)}
-                    refreshing={isloading}
-                  />
-                }
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        {allset ? (
+          <>
+            {!setIdforOneItem && userLogin ? (
+              <View
                 style={{
                   width: "100%",
-                  marginTop: 50,
-                  padding: 5,
-                  paddingHorizontal: 10,
+                  paddingTop: insets.top + 5,
                 }}
               >
-                {allset.map((i) => (
-                  <ItemSet
-                    key={i.setID}
+                <ScrollView
+                  refreshControl={
+                    <RefreshControl
+                      onRefresh={() => GetAllSets(userLogin)}
+                      refreshing={isloading}
+                    />
+                  }
+                  style={{
+                    width: "100%",
+                    padding: 5,
+                    paddingHorizontal: 10,
+                  }}
+                >
+                  {allset.map((i) => (
+                    <ItemSet
+                      key={i.setID}
+                      setSetIdforOneItem={setSetIdforOneItem}
+                      data={i}
+                      sethendDelSet={sethendDelSet}
+                      hendDelSet={hendDelSet}
+                    />
+                  ))}
+                </ScrollView>
+              </View>
+            ) : (
+              <>
+                {setIdforOneItem && (
+                  <OneSetPage
+                    setId={setIdforOneItem}
                     setSetIdforOneItem={setSetIdforOneItem}
-                    data={i}
-                    sethendDelSet={sethendDelSet}
-                    hendDelSet={hendDelSet}
+                    login={userLogin}
                   />
-                ))}
-              </ScrollView>
-            </>
-          ) : (
-            <>
-              {setIdforOneItem && (
-                <OneSetPage
-                  setId={setIdforOneItem}
-                  setSetIdforOneItem={setSetIdforOneItem}
-                  login={userLogin}
-                />
-              )}
-            </>
-          )}
-        </>
-      ) : (
-        <Preloader />
-      )}
-      <StatusBar barStyle={"light-content"} />
-    </View>
+                )}
+              </>
+            )}
+          </>
+        ) : (
+          <Preloader />
+        )}
+        <StatusBar barStyle={"light-content"} />
+      </View>
+    </SafeAreaProvider>
   )
 }

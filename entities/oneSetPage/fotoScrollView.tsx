@@ -53,7 +53,9 @@ export default function FotoScrollView({ img, setId }: ScrollProps) {
           </ScrollView>
         </View>
       ) : (
-        <Preloader />
+        <View style={styles.photobox}>
+          <Preloader />
+        </View>
       )}
     </>
   )
