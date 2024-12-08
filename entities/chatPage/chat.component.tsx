@@ -62,10 +62,10 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
   const inChat = (login: string, userId: string) => {
     userInByUserName(login, userId)
   }
-
+  
+// Kostyli
   useEffect(() => {
     inChat(login, userId)
-
     setTimeout(() => {
       if (!subdata) {
         inChat("load...", "00000")
@@ -76,10 +76,8 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
   useEffect(() => {
     setTimeout(() => {
       outChat("00000")
+      scrollToEnd()
     }, 400)
-    setTimeout(() => {
-      outChat("00000")
-    }, 600)
     return () => outChat(userId)
   }, [])
 

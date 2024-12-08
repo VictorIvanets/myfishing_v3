@@ -19,8 +19,9 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context"
-import { getWeatherApi } from "../mapPage/api/api.getsForMarker"
-import Weather from "../oneSetPage/weather"
+import Weather from "../../widgets/weather/weather"
+import { useSwipe } from "@/hooks/swipe"
+import { getWeatherApi } from "@/widgets/weather/api.weather"
 
 export default function MenuStartPage() {
   const [atomUserState] = useAtom(userAtom)
@@ -31,6 +32,7 @@ export default function MenuStartPage() {
   const [activeExitBtn, setActiveExitBtn] = useState<boolean>(false)
   const [activeLinkBtn, setActiveLinkBtn] = useState<boolean>(false)
   const [weather, setWeather] = useState<object[]>([])
+  const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight, 6)
   const insets = useSafeAreaInsets()
 
   const animationValueLeft = new Animated.Value(0)
@@ -59,7 +61,7 @@ export default function MenuStartPage() {
         coordsAtomState.latitude,
         coordsAtomState.longitude
       )
-      if (typeof res !== "string") setWeather(res)
+      if (!res.message) setWeather(res)
     } else return
   }
 
@@ -67,8 +69,20 @@ export default function MenuStartPage() {
     getWeather()
   }, [])
 
+  function onSwipeLeft() {
+    hidenMenu()
+  }
+
+  function onSwipeRight() {
+    viewMenu()
+  }
+
   return (
-    <Pressable onTouchStart={() => hidenMenu()} style={styles.box}>
+    <Pressable
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      style={styles.box}
+    >
       <SafeAreaProvider>
         <Animated.View
           style={{

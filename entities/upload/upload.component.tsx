@@ -14,10 +14,12 @@ interface UploadPhotoProps {
   setID: number
 }
 
+const ERROR = "ПОМИЛКА"
+const SUCCESS = "ЗАВАНТАЖЕНО"
+
 export default function UploadPhoto({ setID }: UploadPhotoProps) {
   const [filePath, setFilePath] = useState<string | null | undefined>(null)
   const [filename, setFilename] = useState<string | null | undefined>(null)
-
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [resultUpload, setResultUpload] = useState<string | null>(null)
@@ -29,7 +31,6 @@ export default function UploadPhoto({ setID }: UploadPhotoProps) {
     setResultUpload(null)
     const res = await useCamera()
     if (!res) {
-      // setError("Помилка")
       return
     }
     setFilename(res.fileName)
@@ -43,7 +44,6 @@ export default function UploadPhoto({ setID }: UploadPhotoProps) {
     setResultUpload(null)
     const res = await useGalleryImage()
     if (!res) {
-      // setError("Помилка")
       return
     }
     setFilename(res.fileName)
@@ -55,12 +55,12 @@ export default function UploadPhoto({ setID }: UploadPhotoProps) {
     setResultUpload(null)
     setIsLoading(true)
     const data = await apiUpoloadImg(uri, name, setID)
-    if (typeof data === "string") {
-      setResultUpload("помилка")
+    if (data.message) {
+      setResultUpload(ERROR)
       setError(data)
       setIsLoading(false)
     } else {
-      setResultUpload("ЗАВАНТАЖЕНО")
+      setResultUpload(SUCCESS)
       setFilename(null)
       setFilePath(null)
       setIsLoading(false)

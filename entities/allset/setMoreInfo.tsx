@@ -1,22 +1,6 @@
-import {
-  Image,
-  StyleSheet,
-  Platform,
-  View,
-  Button,
-  StatusBar,
-  ScrollView,
-  Pressable,
-} from "react-native"
-
+import { View, Pressable } from "react-native"
 import { ThemedText } from "@/components/ThemedText"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import { LOCAL_USERID } from "@/constants/constants"
-import { useNavigation } from "expo-router"
 import { default as styles } from "@/entities/allset/styles.allset"
-import { useEffect, useState } from "react"
-import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
-import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 
 interface SetMoreInfo {
   setIdforOneItem: number
@@ -26,7 +10,6 @@ interface SetMoreInfo {
 
 export default function SetMoreInfo({
   setIdforOneItem,
-  setID,
   setSetIdforOneItem,
 }: SetMoreInfo) {
   return (

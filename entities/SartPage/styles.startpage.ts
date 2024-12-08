@@ -4,7 +4,6 @@ import { borderRadiusMyf, colors } from "@/constants/Colors"
 
 export const stylesStartPage = StyleSheet.create({
   container: {
-    // flex: 1,
     paddingTop: 35,
     width: "100%",
     height: "100%",

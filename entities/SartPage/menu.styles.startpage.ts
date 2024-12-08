@@ -11,7 +11,6 @@ const stylesMenuStartPage = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 2,
-    // paddingTop: 35,
   },
   container: {
     padding: 20,
@@ -24,7 +23,6 @@ const stylesMenuStartPage = StyleSheet.create({
     position: "absolute",
     zIndex: 5,
     alignSelf: "flex-start",
-    // marginTop: 40,
 
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 2 },

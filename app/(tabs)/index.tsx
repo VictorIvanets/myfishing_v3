@@ -19,12 +19,12 @@ export default function StartPage() {
 
   async function getAllSets() {
     const data = await allGetSets()
-    if (typeof data !== "string") setAtomMapResState(data)
+    if (!data.message) setAtomMapResState(data)
   }
   async function getAllSetsByUserId(login: string | null) {
     if (login !== null) {
       const data = await getOneSetsByUser(login)
-      if (typeof data !== "string") setAtomMapResUserState(data)
+      if (!data.message) setAtomMapResUserState(data)
     }
   }
 
@@ -86,44 +86,6 @@ export default function StartPage() {
           Ви можете переглянути місце рибалки на карті, або видалити запис.
         </ThemedText>
       </View>
-      {/* <View>
-        <ThemedText style={styles.contentTextMin} type="mintext">
-          інформація у загальному користуванні!
-        </ThemedText>
-        <ThemedText style={styles.contentTextMin} type="mintext">
-          Усі користувачі можуть бачити усі місця!
-        </ThemedText>
-        <View style={styles.Linkbox}>
-          <Link href={`https://victorivanets.github.io/fishapp/`}>
-            <ThemedText style={styles.icon} type="default">
-              ВЕБ ВЕРСІЯ ДОДАТКУ
-            </ThemedText>
-          </Link>
-        </View>
-      </View>
-
-      <Pressable
-        style={styles.buttonbox}
-        onPress={() => {
-          exitLogin()
-        }}
-        // href={"/(load)"}
-      >
-        <View style={styles.btnitem}>
-          <ThemedText style={styles.colorWhite} type="subtitle">
-            EXIT
-          </ThemedText>
-        </View>
-
-        <View style={styles.btnitem}>
-          <Ionicons
-            style={styles.icon}
-            name="exit-outline"
-            size={30}
-            color={colors.light}
-          />
-        </View>
-      </Pressable> */}
     </View>
   )
 }

@@ -25,13 +25,10 @@ export const apiUpoloadImg = async (
       formData,
       config
     )
-    console.log(data.data)
     return data
   } catch (e) {
     if (e instanceof AxiosError) {
-      console.log(e.message)
-      return e.message
+      return e.response?.data
     }
-    return "ERROR API"
   }
 }

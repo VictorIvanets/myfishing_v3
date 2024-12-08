@@ -106,6 +106,7 @@ const stylesSetItem = StyleSheet.create({
     borderRadius: borderRadiusMyf,
     backgroundColor: colors.dark,
     marginBottom: 10,
+    marginTop: 25,
   },
 
   buttonboxback: {

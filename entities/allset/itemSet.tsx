@@ -1,5 +1,4 @@
 import { View, Pressable } from "react-native"
-
 import { ThemedText } from "@/components/ThemedText"
 import { default as styles } from "@/entities/allset/styles.allset"
 import { MapResponse } from "@/entities/allset/api/api.getAllset"
@@ -21,7 +20,7 @@ export default function ItemSet({
   sethendDelSet,
   hendDelSet,
 }: PropsSet) {
-  const { title, description, date, score, coords, setID } = data
+  const { title, description, date, score, setID } = data
 
   return (
     <LinearGradient

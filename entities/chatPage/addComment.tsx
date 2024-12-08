@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { useAddComment } from "./glq_hooks/chatComment.hook"
 import { Pressable, TextInput, View } from "react-native"
 import { stylesChat as styles } from "@/entities/chatPage/styles.chatpage"
 import { colors } from "@/constants/Colors"
 import Ionicons from "@expo/vector-icons/Ionicons"
+import { PreloaderMin } from "@/components/preloader/preloader"
 
 interface AddCommentComponentProps {
   login: string
@@ -12,14 +13,8 @@ interface AddCommentComponentProps {
 export default function AddCommentComponent({
   login,
 }: AddCommentComponentProps) {
-  const { addedComment, loadingAddComment, errorAddComment } = useAddComment()
+  const { addedComment, loadingAddComment } = useAddComment()
   const [value, setValue] = useState<string>("")
-  const [viewLabel, setViewLabel] = useState(true)
-
-  useEffect(() => {
-    if (value.length > 0) setViewLabel(false)
-    else setViewLabel(true)
-  }, [value])
 
   const onSubmit = async () => {
     if (value.length) {
@@ -42,9 +37,13 @@ export default function AddCommentComponent({
           value={value}
         />
       </View>
-      <Pressable onPress={() => onSubmit()} style={styles.sendBlockText}>
-        <Ionicons name="send" size={50} color={colors.light} />
-      </Pressable>
+      {loadingAddComment ? (
+        <PreloaderMin />
+      ) : (
+        <Pressable onPress={() => onSubmit()} style={styles.sendBlockText}>
+          <Ionicons name="send" size={50} color={colors.light} />
+        </Pressable>
+      )}
     </View>
   )
 }

@@ -36,7 +36,11 @@ export const Components = (props: CommentComponentProps) => {
                     onPress={() => deletedCommentById(i.comId)}
                     style={styles.btndel}
                   >
-                    <AntDesign name="closecircle" size={27} color="black" />
+                    <AntDesign
+                      name="closecircle"
+                      size={27}
+                      color={colors.black}
+                    />
                   </Pressable>
                 )}
                 <ThemedText style={{ color: colors.light }} type="subtitle">

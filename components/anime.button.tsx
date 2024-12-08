@@ -46,8 +46,6 @@ export default function ButtonAnimeView({
       style={styles.buttonPress}
       onPress={onPress}
       onPressIn={() => animeIn.start(() => animeOut.start())}
-      // onPressIn={() => animeIn.start()}
-      // onPressOut={() => animeOut.start()}
     >
       <Animated.View
         style={{

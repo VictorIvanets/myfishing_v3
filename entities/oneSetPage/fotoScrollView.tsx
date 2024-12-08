@@ -13,18 +13,15 @@ interface ScrollProps {
 export default function FotoScrollView({ img, setId }: ScrollProps) {
   const [fotoInFolder, setFotoInFolder] = useState<string[]>()
 
-  useEffect(() => {
-    const foto = loadFotoInFolder(`${setId}`)
+  const loadFoto = async (setId: number) => {
+    const data = await loadFotoInFolder(`${setId}`)
+    if (!data.message) setFotoInFolder(data.reverse())
+  }
 
-    if (foto) {
-      foto.then((res) =>
-        setTimeout(() => {
-          if (Array.isArray(res)) {
-            setFotoInFolder(res.reverse())
-          }
-        }, 2000)
-      )
-    }
+  useEffect(() => {
+    setTimeout(() => {
+      loadFoto(setId)
+    }, 2000)
   }, [img, setId])
 
   return (

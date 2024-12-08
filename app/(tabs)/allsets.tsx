@@ -36,7 +36,7 @@ export default function AllSetPage() {
   async function GetAllSets(userLogin: string) {
     setisloading(true)
     const data = await getOneSetsByUser(userLogin)
-    if (typeof data !== "string") {
+    if (!data.message) {
       setAllset(data.reverse())
       setisloading(false)
     }

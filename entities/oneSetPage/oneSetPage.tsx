@@ -7,7 +7,7 @@ import { Link } from "expo-router"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@/constants/Colors"
 import FotoScrollView from "./fotoScrollView"
-import Weather from "./weather"
+import Weather from "../../widgets/weather/weather"
 import { MapResponse } from "../allset/api/api.getAllset"
 import CommentScrollView from "./comments/commetsSetPage"
 import UploadPhoto from "../upload/upload.component"
@@ -50,7 +50,7 @@ export default function OneSetPage(props: OneSetPage) {
 
   async function GetSet(setId: number) {
     const data = await getOneSetsBySetId(setId)
-    if (typeof data !== "string") {
+    if (!data.message) {
       setOneSet(data)
     }
   }

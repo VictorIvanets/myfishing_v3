@@ -9,10 +9,6 @@ import MapView, {
 } from "react-native-maps"
 import { Pressable, StatusBar, StyleSheet, View } from "react-native"
 import { ThemedText } from "@/components/ThemedText"
-import {
-  getAllSets,
-  MapResponse,
-} from "../../entities/mapPage/api/api.getAllsets"
 import NewSetMapMarker from "../../entities/mapPage/newSetMarker"
 import {
   LOCAL_INIT_LAT,
@@ -22,6 +18,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import OneSetPage from "../../entities/oneSetPage/oneSetPage"
 import { colors } from "@/constants/Colors"
+import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
 
 interface MarkerProps {
   latitude: number
@@ -76,11 +73,13 @@ export default function MapPage() {
   }
 
   const loadAllSets = async () => {
-    const allset = await getAllSets()
-    setAllSetsMarkers(allset)
-    setCustomeMarker(null)
-    setBtnViewAll(false)
-    setBtnViewOne(true)
+    const allset = await allGetSets()
+    if (!allset.message) {
+      setAllSetsMarkers(allset)
+      setCustomeMarker(null)
+      setBtnViewAll(false)
+      setBtnViewOne(true)
+    }
   }
 
   const returtToMap = async () => {
@@ -136,13 +135,7 @@ export default function MapPage() {
                         latitude: marker.coords[0],
                         longitude: marker.coords[1],
                       }}
-                    >
-                      {/* <Callout
-                  // onPress={() => navigate(`/startpage/set/${marker.setID}`)}
-                  >
-                    <MapMarker marker={marker} />
-                  </Callout> */}
-                    </Marker>
+                    ></Marker>
                   ))}
                 {customMarker && !allSetsMarkers && (
                   <Marker
@@ -151,15 +144,7 @@ export default function MapPage() {
                     onPress={(e: MarkerPressEvent) => {
                       setViewSetMarker(e.nativeEvent.coordinate)
                     }}
-                  >
-                    {/* <Callout
-                  onPress={(e: CalloutPressEvent) => {
-                    // console.log(e.nativeEvent.coordinate)
-                  }}
-                >
-                  <NewSetMapMarker /> 
-                </Callout> */}
-                  </Marker>
+                  ></Marker>
                 )}
               </MapView>
             ) : (
