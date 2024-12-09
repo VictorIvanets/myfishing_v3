@@ -1,12 +1,14 @@
 import { View } from "react-native"
-import { default as styles } from "./styles.oneSetPage"
 import { ThemedText } from "../../components/ThemedText"
 
 interface Weather {
   weather: object[]
+  customStyles?: boolean
 }
 
-function Weather({ weather }: Weather | any) {
+function Weather({ weather, customStyles = true }: Weather | any) {
+  const styles = customStyles ? stylesWeather : stylesWeatherMenu
+
   let wind
   if (weather) {
     const wd = weather[2].deg
@@ -49,3 +51,40 @@ function Weather({ weather }: Weather | any) {
 }
 
 export default Weather
+
+import { StyleSheet } from "react-native"
+
+import { colors } from "@/constants/Colors"
+
+const stylesWeather = StyleSheet.create({
+  widgetText: {
+    color: colors.deepdark,
+    fontFamily: "RobotoRegular",
+    fontWeight: 400,
+  },
+  weatherbox: {
+    width: "47%",
+    height: 65,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    backgroundColor: colors.light,
+    borderRadius: 10,
+    alignItems: "flex-start",
+    justifyContent: "center",
+    marginBottom: 7,
+  },
+})
+const stylesWeatherMenu = StyleSheet.create({
+  widgetText: {
+    color: colors.gray,
+    fontFamily: "RobotoRegular",
+    fontWeight: 400,
+    fontSize: 14,
+    lineHeight: 18,
+  },
+  weatherbox: {
+    width: "100%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+})

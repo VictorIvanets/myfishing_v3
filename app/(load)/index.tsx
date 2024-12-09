@@ -15,20 +15,28 @@ import styles from "./styles.loadpage"
 import { Link } from "expo-router"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { colors } from "@/constants/Colors"
+import { useAtom } from "jotai"
+import { coordsAtom, userAtom } from "@/store/store.state"
 
 export default function LoadPage() {
   const [location, setLocation] = useState<Location.LocationObjectCoords>()
   const [errorMsg, setErrorMsg] = useState("")
   const [locallStoreLogin, setlocallStoreLogin] = useState<string | null>(null)
   const [locallStoreJWT, setlocallStoreJWT] = useState<string | null>(null)
+  const [_atomUserState, setAtomUserState] = useAtom(userAtom)
+  const [_atomCoordsState, setAtomCoordsState] = useAtom(coordsAtom)
 
   const locallStoreGetData = async () => {
     try {
       const login = await AsyncStorage.getItem(LOCAL_LOGIN)
       const jwt = await AsyncStorage.getItem(LOCAL_JWT)
       const iserId = await AsyncStorage.getItem(LOCAL_USERID)
-      // console.log(login, iserId)
       if (login !== null && jwt !== null && iserId !== null) {
+        setAtomUserState({
+          login: login,
+          access_token: jwt,
+          userId: iserId,
+        })
         setlocallStoreLogin(login)
         setlocallStoreJWT(jwt)
       } else {
@@ -51,6 +59,10 @@ export default function LoadPage() {
       setLocation(coords)
       await AsyncStorage.setItem(LOCAL_INIT_LAT, `${coords?.latitude}`)
       await AsyncStorage.setItem(LOCAL_INIT_LON, `${coords?.longitude}`)
+      setAtomCoordsState({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      })
     } catch {
       Alert.alert("Не можу визначити локацію")
     }
@@ -59,7 +71,7 @@ export default function LoadPage() {
   useEffect(() => {
     locallStoreGetData()
     getLocation()
-  }, [])
+  }, [locallStoreLogin])
 
   let text = "Waiting.."
   if (errorMsg) {
@@ -70,7 +82,7 @@ export default function LoadPage() {
 
   return (
     <LinearGradient
-      colors={[colors.light, "transparent", colors.deepdark]}
+      colors={[colors.black, colors.deepdark]}
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"} />

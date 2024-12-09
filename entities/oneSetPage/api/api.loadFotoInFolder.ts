@@ -1,18 +1,15 @@
 import { PREFIX } from "@/constants/constants"
-//@ts-ignore next line
-import axios from "react-native-axios"
+import axios, { AxiosError } from "axios"
 
 export async function loadFotoInFolder(
   setId: string | undefined
-): Promise<string | string[]> {
+): Promise<any | string[]> {
   try {
     const { data } = await axios.get<string[]>(`${PREFIX}getfoto/get/${setId}`)
     return data
   } catch (e) {
-    // console.log(e)
-    // if (e instanceof AxiosError) {
-    //   return e.message
-    // }
-    return "error"
+    if (e instanceof AxiosError) {
+      return e.response?.data
+    }
   }
 }

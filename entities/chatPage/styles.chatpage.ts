@@ -52,6 +52,12 @@ export const stylesChat = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
   },
+  userinitemactiveLoad: {
+    height: 30,
+    paddingHorizontal: 10,
+    borderWidth: 2,
+    borderRadius: 5,
+  },
   commentsbox: {
     width: "100%",
     height: "90%",

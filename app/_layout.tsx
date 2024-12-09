@@ -26,6 +26,7 @@ export default function RootLayout() {
     RalewayItalic: require("../assets/fonts/Raleway-Italic.ttf"),
     HelveticaNeue: require("../assets/fonts/HelveticaNeueCyr-Light.ttf"),
     RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
   })
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 export const stylesMapPage = StyleSheet.create({
@@ -33,7 +33,7 @@ export const stylesMapPage = StyleSheet.create({
     justifyContent: "center",
     width: "45%",
     height: 40,
-    borderRadius: 2,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.dark,
   },
   buttonactyve: {
@@ -41,7 +41,7 @@ export const stylesMapPage = StyleSheet.create({
     justifyContent: "center",
     width: "45%",
     height: 40,
-    borderRadius: 2,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.light,
   },
   colorWhite: {
@@ -52,7 +52,7 @@ export const stylesMapPage = StyleSheet.create({
 
 export const stylesMapMarker = StyleSheet.create({
   containermarker: {
-    borderRadius: 5,
+    borderRadius: borderRadiusMyf,
     backgroundColor: colors.deepdark,
     width: "100%",
     height: "100%",

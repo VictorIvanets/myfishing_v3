@@ -15,11 +15,11 @@ import {
 import { useEffect, useRef, useState } from "react"
 import { CommentData } from "./glq_hooks/chat.types"
 import { UserComponent } from "./UserComponent"
-import { Link } from "expo-router"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import { Components } from "./comments"
 import AddCommentComponent from "./addComment"
 import { Audio } from "expo-av"
+import { router } from "expo-router"
 
 interface ChatpageProps {
   login: string
@@ -28,21 +28,18 @@ interface ChatpageProps {
 
 export default function ChatPage({ login, userId }: ChatpageProps) {
   const { deletedCommentById } = useDelComment()
-  const { loading, error, allComm } = useQueryAllComment()
+  const { loading, allComm } = useQueryAllComment()
   const { subdata } = useSubscribeForCheck()
   const { subdataComment } = useSubscribeForComment()
   const [allCommentData, setAllCommentData] = useState<CommentData[]>([])
   const { userOutByUserId } = useCheckOut()
   const { userInByUserName } = useCheckIn()
-  const [selectUser, setSelectUser] = useState<string>("")
   const scrollViewRef = useRef<ScrollView>(null)
-  const [sound, setSound] = useState<Audio.Sound>()
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/sound/minimal-pop-click-ui-1-198301.mp3")
     )
-    setSound(sound)
     await sound.playAsync()
   }
 
@@ -65,10 +62,24 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
   const inChat = (login: string, userId: string) => {
     userInByUserName(login, userId)
   }
-
+  
+// Kostyli
   useEffect(() => {
     inChat(login, userId)
+    setTimeout(() => {
+      if (!subdata) {
+        inChat("load...", "00000")
+      }
+    }, 300)
   }, [login, userId])
+
+  useEffect(() => {
+    setTimeout(() => {
+      outChat("00000")
+      scrollToEnd()
+    }, 400)
+    return () => outChat(userId)
+  }, [])
 
   useEffect(() => {
     if (subdataComment) setAllCommentData(subdataComment)
@@ -83,17 +94,18 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
       <View style={styles.content}>
         <View style={styles.headercontent}>
           <ThemedText type="subtitle">ЧАТ</ThemedText>
-          <Link
+          <Pressable
             style={styles.buttonbox}
             onPress={() => {
               outChat(userId)
-              subdata.forEach((i) => {
-                if (i.userId === userId) {
-                  outChat(i.userId)
-                }
-              })
+              subdata &&
+                subdata.forEach((i) => {
+                  if (i.userId === userId) {
+                    outChat(i.userId)
+                  }
+                })
+              router.replace("/(tabs)")
             }}
-            href={"/(tabs)"}
           >
             <View style={styles.btnitem}>
               <ThemedText type="default">EXIT</ThemedText>
@@ -107,7 +119,7 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
                 color={colors.light}
               />
             </View>
-          </Link>
+          </Pressable>
         </View>
         <ScrollView
           horizontal
@@ -115,13 +127,7 @@ export default function ChatPage({ login, userId }: ChatpageProps) {
           style={{ height: 40 }}
         >
           {subdata && (
-            <UserComponent
-              userId={userId}
-              login={login}
-              setSelectUser={setSelectUser}
-              subdata={subdata}
-              outChat={outChat}
-            />
+            <UserComponent userId={userId} login={login} subdata={subdata} />
           )}
         </ScrollView>
         <ScrollView ref={scrollViewRef} style={styles.commentsbox}>

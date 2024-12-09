@@ -1,36 +1,26 @@
-import {
-  Image,
-  StyleSheet,
-  Platform,
-  View,
-  Button,
-  StatusBar,
-  ScrollView,
-  Pressable,
-} from "react-native"
+import { View, StatusBar, ScrollView, RefreshControl } from "react-native"
 
-import { ThemedText } from "@/components/ThemedText"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { LOCAL_LOGIN, LOCAL_USERID } from "@/constants/constants"
-import { useNavigation } from "expo-router"
+import { LOCAL_LOGIN } from "@/constants/constants"
 import { default as styles } from "@/entities/allset/styles.allset"
-import { SetStateAction, useEffect, useState } from "react"
-import allGetSets, { MapResponse } from "@/entities/allset/api/api.getAllset"
+import { useEffect, useState } from "react"
+import { MapResponse } from "@/entities/allset/api/api.getAllset"
 import ItemSet from "@/entities/allset/itemSet"
 import getOneSetsByUser from "@/entities/allset/api/api.getSetByUser"
 import Preloader from "@/components/preloader/preloader"
-import SetMoreInfo from "@/entities/allset/setMoreInfo"
-import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import OneSetPage from "@/entities/oneSetPage/oneSetPage"
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context"
 
 export default function AllSetPage() {
-  const [userLogin, setUserLogin] = useState<string>()
+  const [userLogin, setUserLogin] = useState<string | undefined>()
   const [allset, setAllset] = useState<MapResponse[]>([])
   const [setIdforOneItem, setSetIdforOneItem] = useState<number | null>(null)
-  const [setLoginforOneItem, setSetLoginforOneItem] = useState<number | null>(
-    null
-  )
   const [hendDelSet, sethendDelSet] = useState<boolean>(false)
+  const [isloading, setisloading] = useState<boolean>(false)
+  const insets = useSafeAreaInsets()
 
   async function localGetUserLogin() {
     try {
@@ -44,9 +34,11 @@ export default function AllSetPage() {
   }
 
   async function GetAllSets(userLogin: string) {
+    setisloading(true)
     const data = await getOneSetsByUser(userLogin)
-    if (typeof data !== "string") {
-      setAllset(data)
+    if (!data.message) {
+      setAllset(data.reverse())
+      setisloading(false)
     }
   }
 
@@ -59,49 +51,58 @@ export default function AllSetPage() {
   }, [userLogin, hendDelSet])
 
   return (
-    <View style={styles.container}>
-      {allset ? (
-        <>
-          {!setIdforOneItem ? (
-            <>
-              <ScrollView style={{ width: "100%", marginTop: 50, padding: 5 }}>
-                {allset.map((i) => (
-                  <ItemSet
-                    key={i.setID}
-                    setSetIdforOneItem={setSetIdforOneItem}
-                    data={i}
-                    sethendDelSet={sethendDelSet}
-                    hendDelSet={hendDelSet}
-                  />
-                ))}
-              </ScrollView>
-              <Pressable
-                onPress={() => {
-                  setAllset([])
-                  userLogin && GetAllSets(userLogin)
+    <SafeAreaProvider>
+      <View style={styles.container}>
+        {allset ? (
+          <>
+            {!setIdforOneItem && userLogin ? (
+              <View
+                style={{
+                  width: "100%",
+                  paddingTop: insets.top + 5,
                 }}
-                style={styles.buttonReload}
               >
-                <MaterialIcons
-                  style={styles.buttondelIcon}
-                  name="autorenew"
-                  size={30}
-                  color={"#00acac"}
-                />
-              </Pressable>
-            </>
-          ) : (
-            <OneSetPage
-              setId={setIdforOneItem}
-              setSetIdforOneItem={setSetIdforOneItem}
-              login={userLogin}
-            />
-          )}
-        </>
-      ) : (
-        <Preloader />
-      )}
-      <StatusBar barStyle={"light-content"} />
-    </View>
+                <ScrollView
+                  refreshControl={
+                    <RefreshControl
+                      onRefresh={() => GetAllSets(userLogin)}
+                      refreshing={isloading}
+                    />
+                  }
+                  style={{
+                    width: "100%",
+                    padding: 5,
+                    paddingHorizontal: 10,
+                  }}
+                >
+                  {allset.map((i) => (
+                    <ItemSet
+                      key={i.setID}
+                      setSetIdforOneItem={setSetIdforOneItem}
+                      data={i}
+                      sethendDelSet={sethendDelSet}
+                      hendDelSet={hendDelSet}
+                    />
+                  ))}
+                </ScrollView>
+              </View>
+            ) : (
+              <>
+                {setIdforOneItem && (
+                  <OneSetPage
+                    setId={setIdforOneItem}
+                    setSetIdforOneItem={setSetIdforOneItem}
+                    login={userLogin}
+                  />
+                )}
+              </>
+            )}
+          </>
+        ) : (
+          <Preloader />
+        )}
+        <StatusBar barStyle={"light-content"} />
+      </View>
+    </SafeAreaProvider>
   )
 }

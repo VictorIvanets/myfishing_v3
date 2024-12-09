@@ -7,7 +7,7 @@ import {
   LOCAL_PASSWORD,
 } from "@/constants/constants"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useState } from "react"
+import { router } from "expo-router"
 import { Alert, BackHandler } from "react-native"
 
 export const exitLogin = async () => {
@@ -29,6 +29,7 @@ export const exitLogin = async () => {
           await AsyncStorage.removeItem(LOCAL_INIT_LAT)
           await AsyncStorage.removeItem(LOCAL_INIT_LON)
           await AsyncStorage.removeItem(LOCAL_PASSWORD)
+          router.replace("/(load)")
           BackHandler.exitApp()
         },
       },

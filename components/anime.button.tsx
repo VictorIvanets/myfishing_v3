@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/ThemedText"
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { ReactNode } from "react"
 import { Animated, Pressable } from "react-native"
 import { StyleSheet } from "react-native"
@@ -46,8 +46,6 @@ export default function ButtonAnimeView({
       style={styles.buttonPress}
       onPress={onPress}
       onPressIn={() => animeIn.start(() => animeOut.start())}
-      // onPressIn={() => animeIn.start()}
-      // onPressOut={() => animeOut.start()}
     >
       <Animated.View
         style={{
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: "100%",
-    borderRadius: 7,
+    borderRadius: borderRadiusMyf,
   },
   buttonPress: {
     textAlign: "center",

@@ -28,7 +28,7 @@ export default function ChatProvider() {
 
   async function GetAllSets(userLogin: string) {
     const data = await getOneSetsByUser(userLogin)
-    if (typeof data !== "string") {
+    if (!data.message) {
       setAllset(data)
     }
   }

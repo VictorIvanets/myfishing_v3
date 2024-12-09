@@ -6,7 +6,8 @@ import { SetCoordsProps } from "@/app/(tabs)/mappage"
 import Preloader from "../../components/preloader/preloader"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { colors } from "@/constants/Colors"
-import setSets, { getWeatherApi } from "./api/api.getsForMarker"
+import setSets from "./api/api.forMarker"
+import { getWeatherApi } from "@/widgets/weather/api.weather"
 
 type NewSetMapMarker = {
   coords: SetCoordsProps
@@ -170,6 +171,16 @@ export default function NewSetMapMarker(props: NewSetMapMarker) {
                       lon: {coords.longitude}
                     </ThemedText>
                   </View>
+                  <Pressable onPress={() => setViewSetMarker(null)}>
+                    <View style={styles.buttonbox}>
+                      <MaterialIcons
+                        style={{ textAlign: "center" }}
+                        name="keyboard-backspace"
+                        size={30}
+                        color={colors.light}
+                      />
+                    </View>
+                  </Pressable>
                   {errorData && (
                     <ThemedText type="subtitle">{errorData}</ThemedText>
                   )}
@@ -193,7 +204,7 @@ export default function NewSetMapMarker(props: NewSetMapMarker) {
         )}
       </ScrollView>
 
-      <Pressable onPress={() => setViewSetMarker(null)}>
+      {/* <Pressable onPress={() => setViewSetMarker(null)}>
         <View style={styles.buttonbox}>
           <MaterialIcons
             style={{ textAlign: "center" }}
@@ -202,7 +213,7 @@ export default function NewSetMapMarker(props: NewSetMapMarker) {
             color={colors.light}
           />
         </View>
-      </Pressable>
+      </Pressable> */}
     </View>
   )
 }

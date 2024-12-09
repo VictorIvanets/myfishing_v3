@@ -1,19 +1,18 @@
-import { colors } from "@/constants/Colors"
+import { borderRadiusMyf, colors } from "@/constants/Colors"
 import { StyleSheet } from "react-native"
 
 const stylesOneSet = StyleSheet.create({
-  containermarker: {
+  containeset: {
     backgroundColor: colors.deepdark,
     width: "100%",
     height: "100%",
-    paddingTop: 25,
     justifyContent: "space-between",
     alignItems: "center",
   },
 
   ScrollViewbox: {
     width: "100%",
-    height: "27%",
+    height: "28%",
   },
 
   contentbox: {
@@ -23,7 +22,7 @@ const stylesOneSet = StyleSheet.create({
   },
   photobox: {
     width: "100%",
-    height: "60%",
+    height: "57%",
   },
   photoboxContentContainer: {
     justifyContent: "center",
@@ -33,6 +32,26 @@ const stylesOneSet = StyleSheet.create({
     width: 80,
     height: 40,
     alignItems: "center",
+  },
+
+  commLenght: {
+    position: "absolute",
+    width: 20,
+    height: 20,
+    // justifyContent: "center",
+    alignItems: "center",
+    top: -5,
+    right: 0,
+    borderRadius: 15,
+    backgroundColor: colors.light,
+    zIndex: 3,
+    padding: 0,
+    borderWidth: 1,
+  },
+  commLenghttext: {
+    fontSize: 13,
+    color: colors.deepdark,
+    fontFamily: "RobotoBold",
   },
 
   foto: {
@@ -48,18 +67,6 @@ const stylesOneSet = StyleSheet.create({
     color: "rgba(0, 98, 128, 0.9)",
     textAlign: "center",
   },
-  coordslinkbox: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-    width: 150,
-    height: 60,
-    gap: 5,
-    backgroundColor: colors.light,
-    borderRadius: 5,
-  },
   buttonSelectBox: {
     width: "100%",
     height: 40,
@@ -73,7 +80,7 @@ const stylesOneSet = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     height: 40,
-    borderRadius: 7,
+    borderRadius: 10,
     backgroundColor: colors.dark,
   },
   inputBottoLine: {
@@ -82,21 +89,42 @@ const stylesOneSet = StyleSheet.create({
     height: 1,
     marginVertical: 3,
   },
-  weatherbox: {
-    width: 160,
-    height: 60,
-    padding: 5,
+  linkGoogle: {
+    width: "47%",
+    height: 65,
+  },
+  coordslinkbox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    textAlign: "center",
+    width: "100%",
+    height: "100%",
+    gap: 5,
     backgroundColor: colors.light,
-    borderRadius: 5,
+    borderRadius: 10,
+  },
+  weatherbox: {
+    width: "47%",
+    height: 65,
+    paddingVertical: 5,
+    paddingHorizontal: 8,
+    backgroundColor: colors.light,
+    borderRadius: 10,
     alignItems: "flex-start",
     justifyContent: "center",
     marginBottom: 7,
   },
   widgetbox: {
+    width: "100%",
     flexDirection: "row",
     gap: 10,
     justifyContent: "space-between",
-    alignContent: "center",
+    alignContent: "space-between",
+  },
+  widgetboxtext: {
+    color: colors.dark,
   },
   widgetText: {
     color: colors.deepdark,
@@ -110,7 +138,7 @@ const stylesOneSet = StyleSheet.create({
     backgroundColor: colors.gray,
     padding: 5,
     marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   commentText: {
     color: colors.deepdark,
@@ -142,13 +170,13 @@ const stylesOneSet = StyleSheet.create({
   inputBlockText: {
     width: "80%",
     height: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: colors.gray,
   },
   sendBlockText: {
     width: "15%",
     height: "100%",
-    borderRadius: 5,
+    borderRadius: borderRadiusMyf,
     justifyContent: "center",
   },
   inputText: {

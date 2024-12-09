@@ -13,6 +13,8 @@ import Ionicons from "@expo/vector-icons/Ionicons"
 import ButtonAnimeView from "@/components/anime.button"
 import AlertError from "@/components/alertError"
 import getlogin from "./api.auth"
+import { useAtom } from "jotai"
+import { userAtom } from "@/store/store.state"
 
 export default function LoginPage() {
   const [loginInput, setLoginInput] = useState("")
@@ -24,6 +26,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [loginOk, setloginOk] = useState(false)
   const [passVisible, setPassVisible] = useState(false)
+  const [_atomUserState, setAtomUserState] = useAtom(userAtom)
 
   useEffect(() => {
     if (errorAuth) setErrorAuth("")
@@ -59,8 +62,9 @@ export default function LoginPage() {
     } else {
       setIsLoading(true)
       const data = await getlogin(loginInput, passwordInput)
+
       if (!data.login) {
-        setErrorAuth(`Щось не так. Спробуйте ще раз`)
+        setErrorAuth(data.message)
         setIsLoading(false)
         setloginOk(false)
       } else {
@@ -71,6 +75,11 @@ export default function LoginPage() {
         await AsyncStorage.setItem(LOCAL_LOGIN, data.login)
         await AsyncStorage.setItem(LOCAL_JWT, data.access_token)
         await AsyncStorage.setItem(LOCAL_USERID, data.userId)
+        setAtomUserState({
+          login: data.login,
+          access_token: data.access_token,
+          userId: data.userId,
+        })
         setIsLoading(false)
         setLoginInput("")
         setPasswordInput("")
@@ -82,7 +91,7 @@ export default function LoginPage() {
 
   return (
     <LinearGradient
-      colors={[colors.light, "transparent", colors.deepdark]}
+      colors={[colors.black, colors.deepdark]}
       style={styles.container}
     >
       <StatusBar barStyle={"light-content"} />

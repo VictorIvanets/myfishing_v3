@@ -1,6 +1,5 @@
-import { memo, useEffect } from "react"
-import { CommentData, UserData } from "./glq_hooks/chat.types"
-import { View, ScrollView, Pressable } from "react-native"
+import { CommentData } from "./glq_hooks/chat.types"
+import { View, Pressable } from "react-native"
 import { ThemedText } from "../../components/ThemedText"
 import { stylesChat as styles } from "@/entities/chatPage/styles.chatpage"
 import { colors } from "@/constants/Colors"
@@ -22,7 +21,7 @@ export const Components = (props: CommentComponentProps) => {
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
-      colors={[colors.deepdark, colors.light, colors.deepdark]}
+      colors={[colors.deepdark, colors.dark, colors.deepdark]}
     >
       {login ? (
         <>
@@ -37,7 +36,11 @@ export const Components = (props: CommentComponentProps) => {
                     onPress={() => deletedCommentById(i.comId)}
                     style={styles.btndel}
                   >
-                    <AntDesign name="closecircle" size={27} color="black" />
+                    <AntDesign
+                      name="closecircle"
+                      size={27}
+                      color={colors.black}
+                    />
                   </Pressable>
                 )}
                 <ThemedText style={{ color: colors.light }} type="subtitle">

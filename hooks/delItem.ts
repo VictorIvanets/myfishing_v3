@@ -1,7 +1,6 @@
 import { PREFIX } from "@/constants/constants"
 import { Alert } from "react-native"
-//@ts-ignore next line
-import axios, { AxiosError } from "react-native-axios"
+import axios, { AxiosError } from "axios"
 
 export const delItem = async (
   setId: number,
@@ -31,15 +30,16 @@ export const delItem = async (
   return true
 }
 
-export async function fetchDelState(setId: string | number): Promise<string> {
+export async function fetchDelState(
+  setId: string | number
+): Promise<string | any> {
   try {
     const { data } = await axios.delete<string>(`${PREFIX}fishsets/${setId}`)
 
     return data
   } catch (e) {
-    // if (e instanceof AxiosError) {
-    //   return e.message
-    // }
-    return "error"
+    if (e instanceof AxiosError) {
+      return e.response?.data.message
+    }
   }
 }

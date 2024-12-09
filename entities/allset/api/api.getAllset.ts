@@ -1,6 +1,5 @@
 import { PREFIX } from "@/constants/constants"
-//@ts-ignore next line
-import axios from "react-native-axios"
+import axios, { AxiosError } from "axios"
 
 export type Coords = [number, number]
 
@@ -16,18 +15,18 @@ export interface MapResponse {
   weather: object[] | string
 }
 
-const allGetSets = async (): Promise<MapResponse[] | string> => {
+const allGetSets = async (): Promise<MapResponse[] | any> => {
   try {
     const data = await axios.get<MapResponse[]>(
       `${PREFIX}fishsets/all/database`
     )
+
     return data.data
   } catch (e) {
     console.log(e)
-    // if (e instanceof AxiosError) {
-    //   return e.response?.data
-    // } else
-    return `${e}`
+    if (e instanceof AxiosError) {
+      return e.response?.data
+    }
   }
 }
 
